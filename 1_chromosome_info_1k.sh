@@ -3,7 +3,7 @@ gzip -d *.vcf.gz
 #for each vcf I create a genome grid file with 2 columns
 #the first column has chromosomes/scaffolds names
 #the second column has the grid numbers for SweeD and Omegaplus. 
-#I want 1 measurement every 10kb
+#I want 1 measurement every 1kb
 
 for FILE in *.vcf
 do

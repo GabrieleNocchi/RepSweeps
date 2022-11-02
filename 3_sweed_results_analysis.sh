@@ -1,4 +1,4 @@
-### need genes.gff, chrom.txt file and all SweeD_Report files for each species
+### need genes .gff file, chrom.txt file and all SweeD_Report files for each species
 
 # first I format SweeD outputs and add chrom/scaffold name to all files, while removing first 3 lines (empty line, garbage, header)
 while read p; do

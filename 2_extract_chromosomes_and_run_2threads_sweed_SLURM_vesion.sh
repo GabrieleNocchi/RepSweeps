@@ -5,6 +5,8 @@
 #SBATCH --account=def-yeaman
 #SBATCH --array=1-16
 
+# NOTE ARRAY NUMBER ABOVE (1-16) DEPENDS BY NUMBER OF CHROM/SCAFFOLDS IN chrom.txt; IN THIS EXAMPLE THERE WERE 16 SCAFFOLDS
+
 #create chrom.txt and grid.txt with awk from the *_genome_grid_1k.txt file previously generated for each species
 CHROM=$(sed -n "${SLURM_ARRAY_TASK_ID}p" chrom.txt)
 GRID=$(sed -n "${SLURM_ARRAY_TASK_ID}p" grid.txt)

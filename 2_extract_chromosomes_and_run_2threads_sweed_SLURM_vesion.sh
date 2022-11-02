@@ -9,7 +9,7 @@ CHROM=$(sed -n "${SLURM_ARRAY_TASK_ID}p" chrom.txt)
 GRID=$(sed -n "${SLURM_ARRAY_TASK_ID}p" grid.txt)
 
 module load bcftools
-
+#change file name accordingly
 FILE="wright_atuber.vcf.gz"
 
 

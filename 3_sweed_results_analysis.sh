@@ -1,5 +1,9 @@
 ### need genes .gff file, chrom.txt file and all SweeD_Report files for each species
 
+# This is to take care of badly formatted gff with spaces/tabs in the ID field.
+
+awk '{OFS="\t"}{print $1,$2,$3,$4,$5,$6,$7,$8,"id=gene;"}' genes.gff > noid_genes.gff
+
 # first I format SweeD outputs and add chrom/scaffold name to all files, while removing first 3 lines (empty line, garbage, header)
 while read p; do
 
@@ -36,3 +40,4 @@ Rscript dunn_sidak.R
 rm genes_emp.gff
 rm all*
 rm final_genes_analysis.txt
+rm noid_genes.gff

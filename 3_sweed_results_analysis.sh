@@ -23,7 +23,7 @@ Rscript emp.R
 
 # here we make a list of genes intersecting the clr scans. Each gene gets reported as many times as the number of clr scan it includes
 
-/data/programs/bedtools2/bin/bedtools intersect -a *.gff -b all_emp.bed -wo | awk '{OFS="\t"}{print $1,$2,$3,$4,$5,$6,$7,$8,$15}' > genes_emp.gff
+/data/programs/bedtools2/bin/bedtools intersect -a noid_genes.gff -b all_emp.bed -wo | awk '{OFS="\t"}{print $1,$2,$3,$4,$5,$6,$7,$8,$15}' > genes_emp.gff
 
 
 # here first I add for each gene, the count of CLR scans - then I format the final file to only have gene name (given by chrom:start-end), empirical pvalue and number of CLR scans within the gene

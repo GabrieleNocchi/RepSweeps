@@ -1,4 +1,4 @@
-### need genes .gff file, chrom.txt file and all SweeD_Report files for each species
+### need genes .gff file, chrom.txt file, orthogroups map.txt file and all SweeD_Report files for each species
 
 # This is to take care of badly formatted gff with spaces/tabs in the ID field, and adding 500bp flanks each side of each gene
 
@@ -7,7 +7,7 @@ awk '{OFS="\t"}{print $1,$2,$3,$4-500,$5+500,$6,$7,$8,"id=gene;"}' genes.gff > n
 # first I format SweeD outputs and add chrom/scaffold name to all files, while removing first 3 lines (empty line, garbage, header)
 while read p; do
 
-tail -n +4 SweeD_Report.wright_atuber.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
+tail -n +4 SweeD_Report.lowry_phallii.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
 
 done < chrom.txt
 
@@ -36,6 +36,11 @@ Rscript emp.R
 # final file produced = final_genes_dunak.txt
 Rscript dunn_sidak.R
 
+
+#now I add the orthogroup for each gene, retrieved from map.txt
+awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_genes_dunak.txt map.txt > final_genes_dunak_ortho.txt
+# add header
+sed -i '1s/^/gene\tmin_emp_p\tscan_n\tdunn_sidak\torthogroup\n/' final_genes_dunak_ortho.txt
 
 # clean a bit
 rm genes_emp.gff

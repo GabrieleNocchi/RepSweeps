@@ -9,6 +9,9 @@
 awk '{OFS="\t"}{print $1,$2,$3,$4-500,$5+500,$6,$7,$8,"id=gene;"}' genes.gff > noid_genes.gff
 
 
+### Taking care of genes whose start goes below 0 after adding 500bp flanks
+
+awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$2,$3,1,$5,$6,$7,$8,$9;}' noid_genes.gff > tmp && mv tmp noid_genes.gff
 
 
 ### First I format SweeD outputs and add the chrom/scaffold name to all files, while removing first 3 lines (empty line, garbage and header)
@@ -16,7 +19,7 @@ awk '{OFS="\t"}{print $1,$2,$3,$4-500,$5+500,$6,$7,$8,"id=gene;"}' genes.gff > n
 
 while read p; do
 
-tail -n +4 SweeD_Report.lowry_phallii.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
+tail -n +4 SweeD_Report.kubota_ahalleri.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
 
 done < chrom.txt
 

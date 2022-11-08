@@ -11,7 +11,7 @@ awk '{OFS="\t"}{print $1,$2,$3,$4-500,$5+500,$6,$7,$8,"id=gene;"}' genes.gff > n
 
 ### Taking care of genes whose start goes below 0 after adding 500bp flanks
 
-awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$2,$3,1,$5,$6,$7,$8,$9;}' noid_genes.gff > tmp && mv tmp noid_genes.gff
+awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$4+500,$3,1,$5,$6,$7,$8,$9;}' noid_genes.gff > tmp && mv tmp noid_genes.gff
 
 
 ### First I format SweeD outputs and add the chrom/scaffold name to all files, while removing first 3 lines (empty line, garbage and header)
@@ -19,7 +19,7 @@ awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$
 
 while read p; do
 
-tail -n +4 SweeD_Report.kubota_ahalleri.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
+tail -n +4 SweeD_Report.savolainen_alyrata_scandinavia.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
 
 done < chrom.txt
 
@@ -51,7 +51,7 @@ Rscript emp.R
 ### Here first I add for each gene, the count of CLR scans - then I format the final file to only have gene name (given by chrom:start-end), empirical pvalue and number of CLR scans within the gene
 ### I also remove the 500bp flanks from each side of genes, as I need unflanked genes to match genes with orthogroups using the map I created from Jim file
 
-/data/programs/bedtools2/bin/bedtools coverage -a genes_emp.gff -b all_emp.bed -counts | awk '{OFS="\t"}{print $1":"$4+500"-"$5-500,$9,$10}' > final_genes_analysis.txt
+/data/programs/bedtools2/bin/bedtools coverage -a genes_emp.gff -b all_emp.bed -counts | awk '{OFS="\t"}{if ($4 > 1) print $1":"$4+500"-"$5-500,$9,$10; else print $1":"$2"-"$5-500,$9,$10;}' > final_genes_analysis.txt
 
 
 

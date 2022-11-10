@@ -142,8 +142,8 @@ rownames(df) <- c("wright_atuber")
 
 
 ##### Preparing Gabriele top thr % orthogroup p values
-###### lowry_phallii
-gab <- read.table("lowry_phallii_final_orthogroup.txt", header=TRUE)
+###### lowry_phalli
+gab <- read.table("lowry_phalli_final_orthogroup.txt", header=TRUE)
 
 gab_ortho_p <- gab[,7]
 

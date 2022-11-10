@@ -1,12 +1,14 @@
-
-
-### Preparing Gabriele top 10% p values
-
 library(ComplexHeatmap)
-gab <- read.table("final_orthogroup.txt", header=TRUE)
+##### change threshold accordingly
+thr <- 0.1
+
+
+##### Preparing Gabriele top thr % orthogroup p values
+##### wright_atuber
+gab <- read.table("wright_atuber_final_orthogroup.txt", header=TRUE)
 
 gab_ortho_p <- gab[,7]
-thr <- 0.1
+
 
 assign.rank <- function(array){
   pvalues <- array(0, length(array))
@@ -31,7 +33,7 @@ gab <- cbind(gab,gab_ranks)
 gab_outliers <- gab[gab$gab_ranks < thr,]
 
 
-### Preparing Jim top 10% p values
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Amaranthus tuberculatus",]
 
@@ -139,7 +141,37 @@ colnames(df) <- c("annual_precip","isothermality", "max_temp_warmest_month", "me
 rownames(df) <- c("wright_atuber")
 
 
-#########################################
+##### Preparing Gabriele top thr % orthogroup p values
+###### lowry_phallii
+gab <- read.table("lowry_phallii_final_orthogroup.txt", header=TRUE)
+
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+###### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Panicum hallii",]
 
@@ -247,7 +279,38 @@ colnames(df2) <- c("annual_precip","isothermality", "max_temp_warmest_month", "m
 rownames(df2) <- c("lowry_phallii")
 
 
- #####################################
+
+ ##### Preparing Gabriele top thr % orthogroup p values
+ ##### weigel_athaliana
+ gab <- read.table("weigel_athaliana_IBE_final_orthogroup.txt", header=TRUE)
+
+ gab_ortho_p <- gab[,7]
+
+
+ assign.rank <- function(array){
+   pvalues <- array(0, length(array))
+
+   ordered.indexes <- order(array, decreasing = TRUE)
+
+   j <- length(array)
+   for( i in ordered.indexes ){
+     pvalues[i] <- j/length(array)
+     j <- j-1
+   }
+
+   return(pvalues)
+ }
+
+
+ gab_ranks <- assign.rank(gab_ortho_p)
+
+ gab <- cbind(gab,gab_ranks)
+
+
+ gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
  jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
  jim <- jim[jim$species == "Arabidopsis thaliana",]
 
@@ -354,8 +417,38 @@ rownames(df2) <- c("lowry_phallii")
  colnames(df3) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
  rownames(df3) <- c("weigel_athaliana")
 
-########
 
+##### Preparing Gabriele top thr % orthogroup p values
+##### weiger_capsella
+gab <- read.table("weiger_capsella_final_orthogroup.txt", header=TRUE)
+
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Capsella rubella",]
 
@@ -463,7 +556,38 @@ colnames(df4) <- c("annual_precip","isothermality", "max_temp_warmest_month", "m
 rownames(df4) <- c("weigel_capsella")
 
 
-######
+
+##### Preparing Gabriele top thr % orthogroup p values
+###### murray_emag
+gab <- read.table("murray_emag_final_orthogroup.txt", header=TRUE)
+
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Eucalyptus magnificata",]
 
@@ -571,9 +695,39 @@ jim <-jim[order(jim$Orthogroup),]
 df5 <- data.frame(res_percent)
 colnames(df5) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
 rownames(df5) <- c("murray_emag")
-#########
 
 
+##### Preparing Gabriele top thr % orthogroup p values
+###### kubota_ahalleri
+gab <- read.table("kubota_ahalleri_final_orthogroup.txt", header=TRUE)
+
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Arabidopsis halleri",]
 
@@ -681,7 +835,38 @@ colnames(df6) <- c("annual_precip","isothermality", "max_temp_warmest_month", "m
 rownames(df6) <- c("kubota_ahalleri")
 
 
-######
+
+##### Preparing Gabriele top thr % orthogroup p values
+###### murray_esid
+gab <- read.table("murray_esid_final_orthogroup.txt", header=TRUE)
+
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Eucalyptus sideroxylon",]
 
@@ -789,10 +974,37 @@ colnames(df7) <- c("annual_precip","isothermality", "max_temp_warmest_month", "m
 rownames(df7) <- c("murray_esid")
 
 
+##### Preparing Gabriele top thr % orthogroup p values
+###### savolainen_alyrata
+gab <- read.table("savolainen_alyrata_final_orthogroup.txt", header=TRUE)
 
-#####
+gab_ortho_p <- gab[,7]
 
 
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Arabidopsis lyrata",]
 
@@ -900,8 +1112,37 @@ colnames(df8) <- c("annual_precip","isothermality", "max_temp_warmest_month", "m
 rownames(df8) <- c("savolainen_alyrata")
 
 
-####
+##### Preparing Gabriele top thr % orthogroup p values
+##### mitchell_bstricta
+gab <- read.table("mitchell_bstricta_final_orthogroup.txt", header=TRUE)
 
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Boechera stricta",]
 
@@ -1009,8 +1250,37 @@ colnames(df9) <- c("annual_precip","isothermality", "max_temp_warmest_month", "m
 rownames(df9) <- c("mitchell_bstricta")
 
 
-#####
+##### Preparing Gabriele top thr % orthogroup p values
+##### murray_ealb
+gab <- read.table("murray_ealb_final_orthogroup.txt", header=TRUE)
 
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Eucalyptus albens",]
 
@@ -1118,7 +1388,37 @@ colnames(df10) <- c("annual_precip","isothermality", "max_temp_warmest_month", "
 rownames(df10) <- c("murray_ealb")
 
 
-#####
+##### Preparing Gabriele top thr % orthogroup p values
+###### tiffin_truncatula
+gab <- read.table("tiffin_truncatula_final_orthogroup.txt", header=TRUE)
+
+gab_ortho_p <- gab[,7]
+
+
+assign.rank <- function(array){
+  pvalues <- array(0, length(array))
+
+  ordered.indexes <- order(array, decreasing = TRUE)
+
+  j <- length(array)
+  for( i in ordered.indexes ){
+    pvalues[i] <- j/length(array)
+    j <- j-1
+  }
+
+  return(pvalues)
+}
+
+
+gab_ranks <- assign.rank(gab_ortho_p)
+
+gab <- cbind(gab,gab_ranks)
+
+
+gab_outliers <- gab[gab$gab_ranks < thr,]
+
+
+##### Preparing Jim top thr % ortho p values
 jim <- readRDS("run220927_COMBINED25species_mirrored_221026_WZA_OG_pvals.rds")
 jim <- jim[jim$species == "Medicago truncatula",]
 
@@ -1226,7 +1526,7 @@ colnames(df11) <- c("annual_precip","isothermality", "max_temp_warmest_month", "
 rownames(df11) <- c("tiffin_truncatula")
 
 
-
+##### Merging all output for all datasets together and heatmap generation
 final <- rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11)
 final <- as.matrix(final)
 

@@ -132,7 +132,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df <- data.frame(res_percent)
 colnames(df) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -240,7 +240,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df2 <- data.frame(res_percent)
 colnames(df2) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -348,7 +348,7 @@ rownames(df2) <- c("lowry_phallii")
    return(test)
   })
 
-  res_percent <- lapply(res,"/",1240)
+  res_percent <- lapply(res,"/",length(annual_precip$X1))
 
  df3 <- data.frame(res_percent)
  colnames(df3) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -456,7 +456,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df4 <- data.frame(res_percent)
 colnames(df4) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -566,7 +566,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df5 <- data.frame(res_percent)
 colnames(df5) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -674,7 +674,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df6 <- data.frame(res_percent)
 colnames(df6) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -782,7 +782,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df7 <- data.frame(res_percent)
 colnames(df7) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -893,7 +893,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df8 <- data.frame(res_percent)
 colnames(df8) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -1002,7 +1002,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df9 <- data.frame(res_percent)
 colnames(df9) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -1111,7 +1111,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df10 <- data.frame(res_percent)
 colnames(df10) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")
@@ -1219,7 +1219,7 @@ jim <-jim[order(jim$Orthogroup),]
   return(test)
  })
 
- res_percent <- lapply(res,"/",1240)
+ res_percent <- lapply(res,"/",length(annual_precip$X1))
 
 df11 <- data.frame(res_percent)
 colnames(df11) <- c("annual_precip","isothermality", "max_temp_warmest_month", "mean_diurnal", "mean_temp", "mean_temp_cold_quarter", "mean_temp_dry_quarter", "mean_temp_warm_quarter", "mean_temp_wet_quarter", "min_temp_coldest_month", "prec_clim_change","precip_cold_quarter","precip_dry_month","precip_dry_quarter","precip_seasonality","precip_warm_quarter","precip_wet_month","precip_wet_quarter","temp_range","temp_seasonality","tmax_clim_change")

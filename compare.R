@@ -1,7 +1,8 @@
 library(ComplexHeatmap)
 ##### change threshold accordingly
-thr <- 0.1
-
+thr <- 0.05
+##### change wd accordingly
+setwd("/Users/gnocc/Desktop/projects/jim_results_and_ortho_map/")
 
 ##### Preparing Gabriele top thr % orthogroup p values
 ##### wright_atuber
@@ -1530,4 +1531,4 @@ rownames(df11) <- c("tiffin_truncatula")
 final <- rbind(df,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11)
 final <- as.matrix(final)
 
-Heatmap(final, show_column_dend = FALSE,show_row_dend = FALSE,heatmap_legend_param = list(title = "", color_bar = "discrete"))
+Heatmap(final, show_column_dend = FALSE,show_row_dend = FALSE,heatmap_legend_param = list(title = "", color_bar = "continuous"),row_names_side = "left")

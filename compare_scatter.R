@@ -198,9 +198,9 @@
     my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
     pdf("wright_atuber_scatter.pdf")
-    par(mfrow = c(7, 3), mar=c(3,3,3,3))
+    par(mfrow = c(7, 3), mar=c(1,1,1,1))
     lapply(my_list, function(x){
-      return(plot(x$min_sdP_DS,x$dunnsidak_orthopvalues, xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+      return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
     })
 
   dev.off()

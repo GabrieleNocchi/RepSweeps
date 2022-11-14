@@ -1,5 +1,6 @@
     ##### change wd accordingly
     library(dplyr)
+    library(Hmisc)
     setwd("/Users/gnocc/Desktop/projects/jim_results_and_ortho_map/")
 
     ##### Preparing Gabriele orthogroup p values
@@ -195,15 +196,15 @@
       left_join(gab, by = c("orthogroup"))
 
 
-    my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+    my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
     pdf("wright_atuber_scatter.pdf", height = 14, width = 14)
-  par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-  lapply(my_list, function(x){
-      return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
-  })
+    par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
+    lapply(names(my_list), function(x){
+        return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
+    })
 
-  dev.off()
+   dev.off()
 
 
 
@@ -400,15 +401,15 @@
     left_join(gab, by = c("orthogroup"))
 
 
-  my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+  my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
   pdf("lowry_phalli.pdf", height = 14, width = 14)
   par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-  lapply(my_list, function(x){
-      return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+  lapply(names(my_list), function(x){
+      return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
   })
 
-  dev.off()
+ dev.off()
 
 
 
@@ -605,12 +606,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("weigel_athaliana_IBE_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
@@ -809,12 +810,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("capsella_rubella_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
@@ -1013,12 +1014,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("kubota_ahalleri_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
@@ -1218,12 +1219,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("murray_esid_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
@@ -1423,12 +1424,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("savolainen_alyrata_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
@@ -1628,12 +1629,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("mitchell_bstricta_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
@@ -1832,16 +1833,15 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("murray_ealb_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()
-
 
 ##### Preparing Gabriele orthogroup p values
 ##### tiffin_truncatula
@@ -2036,12 +2036,12 @@ jim_ranks <- data.frame(jim_ranks)
   left_join(gab, by = c("orthogroup"))
 
 
-my_list <- list(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
+my_list <- llist(annual_precip,isothermality, max_temp_warmest_month, mean_diurnal, mean_temp, mean_temp_cold_quarter, mean_temp_dry_quarter, mean_temp_warm_quarter, mean_temp_wet_quarter, min_temp_coldest_month, prec_clim_change,precip_cold_quarter,precip_dry_month,precip_dry_quarter,precip_seasonality,precip_warm_quarter,precip_wet_month,precip_wet_quarter,temp_range,temp_seasonality,tmax_clim_change)
 
 pdf("tiffin_truncatula_scatter.pdf", height = 14, width = 14)
 par(mfrow = c(7, 3), mar=c(4,4,4,4), cex.axis=0.7, cex.lab=1, cex.main=1, cex.sub=1,mgp=c(2,1,0) )
-lapply(my_list, function(x){
-    return(plot(-log10(as.numeric(x$min_sdP_DS)),-log10(x$dunnsidak_orthopvalues), xlab="Jim_WZA_ortho_p", ylab="Gabriele_SweeD_ortho_p"))
+lapply(names(my_list), function(x){
+    return(plot(-log10(as.numeric(my_list[[x]]$min_sdP_DS)),-log10(my_list[[x]]$dunnsidak_orthopvalues), xlab="WZA_ortho_p", ylab="SweeD_ortho_p", main = x))
 })
 
 dev.off()

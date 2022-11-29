@@ -13,7 +13,11 @@ cat formatted_* > all_5k.bed
 rm formatted*
 
 
-/data/programs/bedtools2/bin/bedtools intersect -a all_5k.bed -b all_1k.bed -wo | awk '{OFS="\t"}{print $1,$2,$3,$4,$5,$10}' | awk '{OFS="\t"}{print $1":"$2"-"$3,$2,$3,$4,$5,$6}'> to_plot_in_R.txt
+
+/data/programs/bedtools2/bin/bedtools coverage -a all_5k.bed -b savolainen_alyrata_scandinavia.vcf.gz -counts > tmp
+mv tmp all_5k.bed
+
+/data/programs/bedtools2/bin/bedtools intersect -a all_5k.bed -b all_1k.bed -wo | awk '{OFS="\t"}{print $1,$2,$3,$4,$5,$6,$11}' | awk '{OFS="\t"}{print $1":"$2"-"$3,$2,$3,$4,$5,$6,$7}'> to_plot_in_R.txt
 
 
 

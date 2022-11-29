@@ -107,3 +107,13 @@ Rscript ortho_dunn_sidak.R
 ### clean the huge amount of garbage generated
 
 
+rm count.txt
+rm final_genes_analysis.txt
+rm ortho_list.txt
+rm final_count.txt
+rm genes_emp.gff
+rm all*
+rm final_genes_dunak.txt
+rm noid_genes.gff
+rm ortho_gene_count.txt
+rm tmp_file.txt

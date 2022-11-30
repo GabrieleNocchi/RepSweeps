@@ -3,7 +3,6 @@
 
 
 
-
 ### This is to take care of badly formatted gff with spaces/tabs in the ID field, and adding 500bp flanks each side of each gene
 
 awk '{OFS="\t"}{print $1,$2,$3,$4-500,$5+500,$6,$7,$8,"id=gene;"}' genes.gff > noid_genes.gff
@@ -15,7 +14,7 @@ awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$
 
 
 ### First I format SweeD outputs and add the chrom/scaffold name to all files, while removing first 3 lines (empty line, garbage and header)
-### CHANGE PREFIX OF SWEED REPORT FILE FOR EACH SPECIES BEFORE RUNNING THIS SCRIPT
+########## CHANGE PREFIX OF SWEED REPORT FILE FOR EACH SPECIES BEFORE RUNNING THIS SCRIPT ##########
 
 while read p; do
 
@@ -31,7 +30,7 @@ cat formatted_* > all.bed
 
 rm formatted*
 
-### ADDITIONAL LINE TO RESTRICT ANALYSIS  WITHIN GENES ONLY
+### Restrict analysis to genes only
 /data/programs/bedtools2/bin/bedtools intersect -a all.bed -b noid_genes.gff -wa | uniq > tmp
 mv tmp all.bed
 
@@ -59,15 +58,16 @@ mv tmp all.bed
 Rscript average.R
 
 
-### Transform mean_CLR of each gene into empirical p values
-Rscript emp.R
-
 
 ### Now it is time to add the orthogroup for each gene, retrieved from map.txt
 
-awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_genes_average_2.txt map.txt > final_genes_average_ortho.txt
+awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_genes_average.txt map.txt > final_genes_average_ortho.txt
 
 
+# Transform the mean CLRs for each gene linkable to a orthogroup in the map, into empirical p values
+Rscript emp.R
+
+mv final_genes_average_ortho_tmp.txt final_genes_average_ortho.txt
 
 
 ### Count genes in each orthogroup in a very patchy way
@@ -107,7 +107,6 @@ rm count.txt
 rm final_genes_analysis.txt
 rm ortho_list.txt
 rm final_count.txt
-rm genes_emp.gff
 rm all*
 rm final_genes_average.txt
 rm final_genes_average_2.txt

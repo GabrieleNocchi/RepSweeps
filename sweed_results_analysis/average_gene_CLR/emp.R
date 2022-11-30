@@ -1,7 +1,7 @@
-sweed <- read.table("final_genes_average.txt", header=TRUE)
+sweed <- read.table("final_genes_average_ortho.txt", header=FALSE)
 
-sw <- sweed$mean_CLR
-
+sw <- sweed[,4]
+ortho <- sweed[,5]
 
 
 assign.pvalues <- function(array){
@@ -22,8 +22,9 @@ assign.pvalues <- function(array){
 
 mean_emp_p <- assign.pvalues(sw)
 
-sweed <- cbind(sweed,mean_emp_p)
-sweed <- subset(sweed, select = -c(mean_CLR) )
 
-write.table(sweed, file = "final_genes_average_2.txt", quote = FALSE, row.names = FALSE,col.names=FALSE, sep = "\t")
+sweed <- subset(sweed, select = -c(V4,V5) )
+sweed <- cbind(sweed,mean_emp_p, ortho)
+
+write.table(sweed, file = "final_genes_average_ortho_tmp.txt", quote = FALSE, row.names = FALSE,col.names=FALSE, sep = "\t")
 

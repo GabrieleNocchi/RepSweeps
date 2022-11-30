@@ -14,7 +14,7 @@ genes_mean <- as.data.frame(genes_mean)
 
 genes_adjusted <- cbind(genes_minimum, genes_mean$name)
 
-colnames(genes_adjusted) <- c("gene","min_emp_p", "scan_n", "mean_emp_p")
+colnames(genes_adjusted) <- c("gene","min_CLR", "scan_n", "mean_CLR")
 
 
 write.table(genes_adjusted, file = "final_genes_average.txt", quote = FALSE, row.names = FALSE,col.names=TRUE, sep = "\t")

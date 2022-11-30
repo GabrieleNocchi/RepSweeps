@@ -109,7 +109,6 @@ rm ortho_list.txt
 rm final_count.txt
 rm all*
 rm final_genes_average.txt
-rm final_genes_average_2.txt
 rm genes_stats.gff
 rm noid_genes.gff
 rm ortho_gene_count.txt

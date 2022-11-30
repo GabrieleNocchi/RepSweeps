@@ -19,7 +19,7 @@ awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$
 
 while read p; do
 
-tail -n +4 SweeD_Report.wright_atuber.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
+tail -n +4 SweeD_Report.mitchell_bstricta.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
 
 done < chrom.txt
 
@@ -31,7 +31,7 @@ cat formatted_* > all.bed
 
 rm formatted*
 
-################################### ADDITIONAL LINE TO CALCULATE EMP P VALUES ON GENES ONLY
+################################### ADDITIONAL LINE TO CALCULATE EMP P VALUES BASED ON SCANS WITHIN GENES ONLY
 /data/programs/bedtools2/bin/bedtools intersect -a all.bed -b noid_genes.gff -wa | uniq > tmp
 mv tmp all.bed
 ######################################################################################
@@ -59,7 +59,7 @@ Rscript emp.R
 
 
 
-### I use the script below to take the minimum emp pvalue for each gene and apply a dunn sidak correction to it, based on the nummber of CLR scan within each gene
+### I use the script below to take the average emp pvalue for each gene
 
 Rscript average.R
 
@@ -68,7 +68,7 @@ Rscript average.R
 
 ### Now it is time to add the orthogroup for each gene, retrieved from map.txt
 
-awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_genes_dunak.txt map.txt > final_genes_dunak_ortho.txt
+awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_genes_average.txt map.txt > final_genes_average_ortho.txt
 
 
 
@@ -77,20 +77,20 @@ awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_
 
 Rscript ortho_count.R
 
-awk '{print $5}' final_genes_dunak_ortho.txt > ortho_list.txt
+awk '{print $5}' final_genes_average_ortho.txt > ortho_list.txt
 
 ./create_file.sh > count.txt
 
 awk '{print $2}' count.txt > final_count.txt
 
-paste final_genes_dunak_ortho.txt final_count.txt > tmp_file.txt
+paste final_genes_average_ortho.txt final_count.txt > tmp_file.txt
 
 
 
 
 ### Add header to avoid loosing track of what each column is
 
-sed -i '1s/^/gene\tmin_emp_p\tscan_n\tdunn_sidak\torthogroup\tortho_size\n/' tmp_file.txt
+sed -i '1s/^/gene\tmin_emp_p\tscan_n\tmean_emp_p\torthogroup\tortho_size\n/' tmp_file.txt
 
 
 
@@ -113,7 +113,8 @@ rm ortho_list.txt
 rm final_count.txt
 rm genes_emp.gff
 rm all*
-rm final_genes_dunak.txt
+rm final_genes_average.txt
 rm noid_genes.gff
 rm ortho_gene_count.txt
 rm tmp_file.txt
+rm final_genes_average_ortho.txt

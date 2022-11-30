@@ -1,6 +1,6 @@
 library(dplyr)
 
-ortho <- read.table("final_genes_dunak_ortho.txt", header = FALSE)
+ortho <- read.table("final_genes_average_ortho.txt", header = FALSE)
 
 
 ortho_gene_count <- ortho %>% count(V5)

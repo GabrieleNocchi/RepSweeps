@@ -49,7 +49,7 @@ species <- rep("atuber", length(l$orthogroup))
 l <- cbind(l,species)
 
 
-results <- rbind(a,b,c,d,e,f,g,h,j,k,l)
+results <- rbind(a,b,c,d,e,f,g,h,i,j,k,l)
 climate <- rep("mean_temp", length(results$species))
 
 results <- cbind(results,climate)

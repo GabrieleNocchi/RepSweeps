@@ -1,5 +1,5 @@
 
-setwd("/Users/gnocc/Desktop/")
+setwd("/Users/gnocc/Desktop/PicMin/")
 lib <- c("cowplot","poolr","mvmeta","qvalue","tidyr","ape","VGAM","ggExtra","pbmcapply","parallel","wCorr","data.table","ggplot2","viridis","ggridges","dplyr","readr")
 sapply(lib,library,character.only=T)
 
@@ -37,7 +37,7 @@ remove_small_OG = names(table(OG_maxP$Orthogroup)[table(OG_maxP$Orthogroup) < or
 OG_maxP_test <- OG_maxP[!OG_maxP$Orthogroup %in% unique(remove_small_OG),]
 
 # And get minP
-minPval_OG <- OG_maxP_test[,.(minP=min(max_sdP_DS)),by=Orthogroup]
+minPval_OG <- OG_maxP_test[,.(minP=min(ortho_DS)),by=Orthogroup]
 
 picmin_cor_mats <- pbmclapply(3:length(focal_datasets_climate),function(n){
 
@@ -66,7 +66,7 @@ picmin_res <- rbindlist(pbmclapply(unique(OG_maxP_test$Orthogroup),function(OG){
   tmp <- OG_maxP_test[OG_maxP_test$Orthogroup == OG,]
   # Run first with dunn-sidak correction
   # first_run = PicMin_bugfix(tmp$max_sdP_DS, picmin_cor_mats[[as.character(nrow(tmp))]], numReps = 100,correction = "dunn-sidak")
-  first_run = PicMin_bugfix(tmp$max_sdP_DS, picmin_cor_mats[[as.character(nrow(tmp))]], numReps = 1000,correction = "tippett")
+  first_run = PicMin_bugfix(tmp$ortho_DS, picmin_cor_mats[[as.character(nrow(tmp))]], numReps = 1000,correction = "tippett")
 
   if(first_run$p > 0.1){
     return(first_run)
@@ -74,7 +74,7 @@ picmin_res <- rbindlist(pbmclapply(unique(OG_maxP_test$Orthogroup),function(OG){
     # # How many iterations to run Tippett
     second_run_iter = ifelse(10/first_run$p > 1e8, 1e8, round(10/first_run$p)*10)
     # # Run
-    second_run = PicMin_bugfix(tmp$max_sdP_DS, picmin_cor_mats[[as.character(nrow(tmp))]], numReps = second_run_iter,correction = "tippett")
+    second_run = PicMin_bugfix(tmp$ortho_DS, picmin_cor_mats[[as.character(nrow(tmp))]], numReps = second_run_iter,correction = "tippett")
     return(second_run)
   }
 },mc.cores=n_cores))

@@ -6,7 +6,7 @@ b <- read.table("ingvarsson_ptremula_final_orthogroup.txt", h = T)
 species <- rep("ptremula", length(b$orthogroup))
 b <- cbind(b,species)
 
-c <- read.table("lowry_phalli_final_orthogroup.txt", h = T)
+c <- read.table("lowry_phallii_final_orthogroup.txt", h = T)
 species <- rep("phalli", length(c$orthogroup))
 c <- cbind(c,species)
 
@@ -27,8 +27,8 @@ g <- read.table("murray_emag_final_orthogroup.txt", h = T)
 species <- rep("emag", length(g$orthogroup))
 g <- cbind(g,species)
 
-h <- read.table("savolainen_alyrata_final_orthogroup.txt", h = T)
-species <- rep("alyrata", length(h$orthogroup))
+h <- read.table("todesco_hpet_final_orthogroup.txt", h = T)
+species <- rep("hpet", length(h$orthogroup))
 h <- cbind(h,species)
 
 
@@ -40,7 +40,7 @@ j <- read.table("weigel_athaliana_IBE_final_orthogroup.txt", h = T)
 species <- rep("athaliana", length(j$orthogroup))
 j <- cbind(j,species)
 
-k <- read.table("weiger_capsella_final_orthogroup.txt", h = T)
+k <- read.table("weigel_capsella_final_orthogroup.txt", h = T)
 species <- rep("capsella", length(k$orthogroup))
 k <- cbind(k,species)
 
@@ -48,8 +48,16 @@ l <- read.table("wright_atuber_final_orthogroup.txt", h = T)
 species <- rep("atuber", length(l$orthogroup))
 l <- cbind(l,species)
 
+m <- read.table("todesco_hann_final_orthogroup.txt", h = T)
+species <- rep("hann", length(m$orthogroup))
+m <- cbind(m,species)
 
-results <- rbind(a,b,c,d,e,f,g,h,i,j,k,l)
+n <- read.table("todesco_hargo_final_orthogroup.txt", h = T)
+species <- rep("hargo", length(n$orthogroup))
+n <- cbind(n,species)
+
+
+results <- rbind(a,b,c,d,e,f,g,h,i,j,k,l,m,n)
 climate <- rep("mean_temp", length(results$species))
 
 results <- cbind(results,climate)

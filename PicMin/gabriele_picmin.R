@@ -10,7 +10,7 @@ source("picmin.R")
 ############################################################################
 # Assemble the Orthofinder Outputs to Analyse
 n_cores = 1 # Number of cpu
-orthogroup_cutoff <- 3 # Minimum number of species in an OG
+orthogroup_cutoff <- 7 # Minimum number of species in an OG
 # max_paralog_per_OG <- 10
 
 # Fetch the processed Orthogroup Pvals

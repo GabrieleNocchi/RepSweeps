@@ -2,7 +2,7 @@ for FILE in *.vcf.gz
 do
 	#extract number of samples to calculate maf threshold to use to exclude singletons snps
 	samples=$(/data/programs/bcftools-1.9/bcftools query -l $FILE| wc -l)
-	af=$(bc <<< "scale=4; 1/($samples*2)")
+	af=$(bc <<< "scale=4; 2/($samples*2)")
 
 
 	#filter

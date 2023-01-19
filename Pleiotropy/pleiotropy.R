@@ -11,7 +11,7 @@ assign.pvalues <- function(array){
   #array <- sample(sw, 1000)
   pvalues <- array(0, length(array))
 
-  ordered.indexes <- order(array, decreasing = T)
+  ordered.indexes <- order(array, decreasing = F)
 
   j <- length(array)
   for( i in ordered.indexes ){
@@ -76,10 +76,9 @@ dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$mean_tau_emp_p,ortho_
 
 ortho_adjusted <- cbind(ortho_minimum, dunnsidak_orthopvalues)
 
-
+ortho_adjusted$dunnsidak_orthopvalues <- empPvals(-ortho_adjusted$dunnsidak_orthopvalues,-ortho_adjusted$dunnsidak_orthopvalues)
 ## Now I Transorm the DS adjusted ortho emp p to Z scores)
 z <- qnorm(1 - ortho_adjusted$dunnsidak_orthopvalues)
-
 
 
 # Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on tau_nolog
@@ -96,11 +95,11 @@ final <- final[is.finite(final$z),]
 
 ###DRAWS
 
-my_list <- replicate(10001,sample_n(final, 1000))
+my_list <- replicate(10000,sample_n(final, 1000))
 
-final_to_plot <- data.frame()
+final_to_plot <- c()
 
 
-for (i in 1:10001) {
-    final_to_plot <- rbind(final_to_plot,mean(my_list[,i]$z))
+for (i in 1:10000) {
+    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
 }

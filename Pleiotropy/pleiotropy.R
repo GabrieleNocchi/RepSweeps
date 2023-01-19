@@ -2,17 +2,16 @@
 # map is what I use to link TAIR_gene to Orthogroup_ID
 
 my_data <- readRDS("Athal_tau_data.rds")
-map <- readRDS("OG_map_Athal_220927.rds")
+map <- readRDS("OG_map_Athal_COMBINED25species_updatedOF_221213.rds")
 
-# Take Ccolumn 4, which is tau_nolog and transform it to empirical p value
-annot <- my_data[,4]
+
 
 
 assign.pvalues <- function(array){
   #array <- sample(sw, 1000)
   pvalues <- array(0, length(array))
 
-  ordered.indexes <- order(array)
+  ordered.indexes <- order(array, decreasing = T)
 
   j <- length(array)
   for( i in ordered.indexes ){
@@ -24,15 +23,9 @@ assign.pvalues <- function(array){
 }
 
 
-mean_tau_emp_p <- assign.pvalues(annot)
 
-### last column of my_data now has empirical p values for tau_nolog
-
-my_data <- cbind(my_data,mean_tau_emp_p)
-
-
-
-# Here below I simply join each row of my_data, which are A thaliana genes, with the row with the same TAIR_gene in the map. I do this so that I am adding the Orthogroup ID to my_data, which I rename "all"
+# Here below I simply join each row of my_data, which are A.thaliana genes, with the row with the same TAIR_gene in the map.
+# I do this so that I am adding the Orthogroup ID to my_data, which I rename "all"
 library(dplyr)
 
 all <- my_data %>%
@@ -40,6 +33,15 @@ all <- my_data %>%
 
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
+
+# Here I take tau_nolog column and transform it into emp-p
+annot <- all[,4]
+
+mean_tau_emp_p <- assign.pvalues(annot)
+
+### last column of all now has empirical p values for tau_nolog
+
+all <- cbind(all,mean_tau_emp_p)
 
 
 # Here I simply count the size (number of paralogues) of each orthogroup, by simply checking the frequency of each unique orthogroup ID in "all"
@@ -94,12 +96,11 @@ final <- final[is.finite(final$z),]
 
 ###DRAWS
 
-my_list <- replicate(1000,sample_n(final, 1000))
+my_list <- replicate(10001,sample_n(final, 1000))
 
 final_to_plot <- data.frame()
 
-for (i in 1:1000) {
+
+for (i in 1:10001) {
     final_to_plot <- rbind(final_to_plot,mean(my_list[,i]$z))
 }
-
-colnames(final_to_plot) <- "mean"

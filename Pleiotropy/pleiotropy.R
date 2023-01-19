@@ -91,7 +91,6 @@ final <- final[is.finite(final$z),]
 
 
 
-# JUST IGNORE THIS BELOW, I WAS JUST SAMPLING BUT THE PROBLEM IS SOMEWHERE ABOVE ###
 
 ###DRAWS
 

@@ -5,7 +5,7 @@ my_data <- readRDS("Athal_tau_data.rds")
 map <- readRDS("OG_map_Athal_COMBINED25species_updatedOF_221213.rds")
 
 
-
+library(qvalue)
 
 assign.pvalues <- function(array){
   #array <- sample(sw, 1000)

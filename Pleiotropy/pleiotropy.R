@@ -116,4 +116,4 @@ ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidenc
     geom_point(shape=19, fill="black", color="black", size=4) +
     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 2) + theme_classic() + coord_flip() +
   theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-                      axis.ticks.y=element_blank()) + xlab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
+                      axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")

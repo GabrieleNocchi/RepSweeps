@@ -18,7 +18,7 @@ awk '{OFS="\t"}{if ($4 > 0)     print $1,$2,$3,$4,$5,$6,$7,$8,$9;else print $1,$
 
 while read p; do
 
-tail -n +4 SweeD_Report.mitchell_bstricta.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
+tail -n +4 SweeD_Report.murray_ealb.vcf.gz_$p| awk -v var="$p" 'BEGIN {OFS="\t"} {print var, $1, $1, "CLRSCAN", $2}' > formatted\_$p
 
 done < chrom.txt
 
@@ -64,11 +64,6 @@ Rscript average.R
 awk '{OFS="\t"}NR==FNR { id[$1]=$0; next } ($1 in id){ print id[$1], $2}' final_genes_average.txt map.txt > final_genes_average_ortho.txt
 
 
-# Transform the mean CLRs for each gene linkable to a orthogroup in the map, into empirical p values
-Rscript emp.R
-
-mv final_genes_average_ortho_tmp.txt final_genes_average_ortho.txt
-
 
 ### Count genes in each orthogroup in a very patchy way
 
@@ -82,7 +77,8 @@ awk '{print $2}' count.txt > final_count.txt
 
 paste final_genes_average_ortho.txt final_count.txt > tmp_file.txt
 
-
+# Removing large OG, then converting each remaining gene mean CLR to emp_P
+Rscript emp.R
 
 
 ### Add header to avoid loosing track of what each column is -- mean_emp_p is the empirical p-value assigned to the gene based on average CLR scored across genes

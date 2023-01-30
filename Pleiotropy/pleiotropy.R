@@ -100,7 +100,7 @@ final <- final[is.finite(final$z),]
 
 my_hits_z <- my_hits %>%
   left_join(final, by = c("Orthogroup"))
-my_hits_z <-my_hits_z[complete.cases(my_hits_z), ]
+my_hits_z1 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
@@ -131,10 +131,10 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
 
-    ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+p1 <-     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
     geom_point(fill="black", color="black", size=4, shape = 16) +
     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z$z)),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z1$z)),colour="red", shape = 17, size = 4) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
@@ -211,7 +211,7 @@ final <- final[is.finite(final$z),]
 
 my_hits_z <- my_hits %>%
   left_join(final, by = c("Orthogroup"))
-my_hits_z <-my_hits_z[complete.cases(my_hits_z), ]
+my_hits_z2 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
@@ -242,10 +242,10 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
 
-    ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+  p2 <-  ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
     geom_point(fill="black", color="black", size=4, shape = 16) +
     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z$z)),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z2$z)),colour="red", shape = 17, size = 4) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
@@ -323,7 +323,7 @@ final <- final[is.finite(final$z),]
 
 my_hits_z <- my_hits %>%
   left_join(final, by = c("Orthogroup"))
-my_hits_z <-my_hits_z[complete.cases(my_hits_z), ]
+my_hits_z3 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
@@ -354,10 +354,10 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
 
-    ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+    p3 <- ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
     geom_point(fill="black", color="black", size=4, shape = 16) +
     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z$z)),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z3$z)),colour="red", shape = 17, size = 4) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
@@ -432,7 +432,7 @@ final <- final[is.finite(final$z),]
 
 my_hits_z <- my_hits %>%
 left_join(final, by = c("Orthogroup"))
-my_hits_z <-my_hits_z[complete.cases(my_hits_z), ]
+my_hits_z4 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
@@ -463,10 +463,10 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
 
-ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+p4<- ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
 geom_point(fill="black", color="black", size=4, shape = 16) +
 geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-geom_point(aes(y=mean(my_hits_z$z)),colour="red", shape = 17, size = 4) +
+geom_point(aes(y=mean(my_hits_z4$z)),colour="red", shape = 17, size = 4) +
 theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
 axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
@@ -542,7 +542,7 @@ final <- final[is.finite(final$z),]
 
 my_hits_z <- my_hits %>%
   left_join(final, by = c("Orthogroup"))
-my_hits_z <-my_hits_z[complete.cases(my_hits_z), ]
+my_hits_z5 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
@@ -573,9 +573,14 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
 
-    ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+    p5 <- ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
     geom_point(fill="black", color="black", size=4, shape = 16) +
     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z$z)),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z5$z)),colour="red", shape = 17, size = 4) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
+
+
+
+library(gridExtra)
+grid.arrange(p1,p2,p3,p4,p5)

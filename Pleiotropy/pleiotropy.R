@@ -156,7 +156,7 @@ all <- my_data %>%
 all<-all[complete.cases(all), ]
 
 # Here I take tau_nolog column and transform it into emp-p
-annot <- all[,3]
+annot <- all[,2]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
@@ -268,7 +268,7 @@ all <- my_data %>%
 all<-all[complete.cases(all), ]
 
 # Here I take tau_nolog column and transform it into emp-p
-annot <- all[,4]
+annot <- all[,3]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
@@ -377,7 +377,7 @@ left_join(map, by = c("TAIR_gene"))
 all<-all[complete.cases(all), ]
 
 # Here I take tau_nolog column and transform it into emp-p
-annot <- all[,5]
+annot <- all[,4]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
@@ -487,7 +487,7 @@ all <- my_data %>%
 all<-all[complete.cases(all), ]
 
 # Here I take tau_nolog column and transform it into emp-p
-annot <- all[,6]
+annot <- all[,5]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 

@@ -125,18 +125,18 @@ df <- cbind(final_to_plot,cat)
 
 
 # Plot
-df <- as.data.frame(df)
+df1 <- as.data.frame(df)
 
-df$final_to_plot <- as.numeric(df$final_to_plot)
-
-
-
-p1 <-     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="black", color="black", size=4, shape = 16) +
-    geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z1$z)),colour="red", shape = 17, size = 4) +
-    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
+# df$final_to_plot <- as.numeric(df$final_to_plot)
+#
+#
+#
+#     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+#     geom_point(fill="black", color="black", size=4, shape = 16) +
+#     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
+#     geom_point(aes(y=mean(my_hits_z1$z)),colour="red", shape = 17, size = 4) +
+#     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
+#           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
 
 
@@ -236,18 +236,18 @@ df <- cbind(final_to_plot,cat)
 
 
 # Plot
-df <- as.data.frame(df)
+df2 <- as.data.frame(df)
 
-df$final_to_plot <- as.numeric(df$final_to_plot)
-
-
-
-  p2 <-  ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="black", color="black", size=4, shape = 16) +
-    geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z2$z)),colour="red", shape = 17, size = 4) +
-    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
+# df$final_to_plot <- as.numeric(df$final_to_plot)
+#
+#
+#
+#     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+#     geom_point(fill="black", color="black", size=4, shape = 16) +
+#     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
+#     geom_point(aes(y=mean(my_hits_z2$z)),colour="red", shape = 17, size = 4) +
+#     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
+#           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
 
 
@@ -348,19 +348,19 @@ df <- cbind(final_to_plot,cat)
 
 
 # Plot
-df <- as.data.frame(df)
+df3 <- as.data.frame(df)
 
-df$final_to_plot <- as.numeric(df$final_to_plot)
-
-
-
-    p3 <- ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="black", color="black", size=4, shape = 16) +
-    geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z3$z)),colour="red", shape = 17, size = 4) +
-    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
-
+# df$final_to_plot <- as.numeric(df$final_to_plot)
+#
+#
+#
+#     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+#     geom_point(fill="black", color="black", size=4, shape = 16) +
+#     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
+#     geom_point(aes(y=mean(my_hits_z3$z)),colour="red", shape = 17, size = 4) +
+#     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
+#           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
+#
 
 #### 4
 my_data <- readRDS("220525_Athal_coexpression_node_stats.rds")
@@ -457,18 +457,18 @@ df <- cbind(final_to_plot,cat)
 
 
 # Plot
-df <- as.data.frame(df)
+df4 <- as.data.frame(df)
 
-df$final_to_plot <- as.numeric(df$final_to_plot)
-
-
-
-p4<- ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-geom_point(fill="black", color="black", size=4, shape = 16) +
-geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-geom_point(aes(y=mean(my_hits_z4$z)),colour="red", shape = 17, size = 4) +
-theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
+# df$final_to_plot <- as.numeric(df$final_to_plot)
+#
+#
+#
+# ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+# geom_point(fill="black", color="black", size=4, shape = 16) +
+# geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
+# geom_point(aes(y=mean(my_hits_z4$z)),colour="red", shape = 17, size = 4) +
+# theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
+# axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
 
 
@@ -567,20 +567,20 @@ df <- cbind(final_to_plot,cat)
 
 
 # Plot
-df <- as.data.frame(df)
+df5 <- as.data.frame(df)
+df <- rbind(df1,df2,df3,df4,df5)
 
 df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
 
-    p5 <- ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+    ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
     geom_point(fill="black", color="black", size=4, shape = 16) +
     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z5$z)),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z1$z), x = "Tissue Specificity - Tau"),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z2$z), x = "Node Betweenness"),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z3$z), x = "Node Strength"),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z4$z), x = "Node Degree"),colour="red", shape = 17, size = 4) +
+    geom_point(aes(y=mean(my_hits_z5$z), x = "Node Closeness"),colour="red", shape = 17, size = 4) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
-
-
-
-library(gridExtra)
-grid.arrange(p1,p2,p3,p4,p5)
+          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.15,-0.1,0.1,0.15,0.2), linetype="dotted")

@@ -30,7 +30,7 @@ library(ggplot2)
 library(qvalue)
 
 
-# 1
+############################# 1
 my_data <- readRDS("Athal_tau_data.rds")
 
 
@@ -66,8 +66,6 @@ all <- all %>%
   left_join(ortho_count, by = c("Orthogroup"))
 
 
-
-
 ### DS Correction per Orthogroup
 ### I take only one gene/row per orthogroup, the row with the gene with minimum emp_p in that Orthogroup
 
@@ -87,13 +85,12 @@ dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$mean_tau_emp_p,ortho_
 ortho_adjusted <- cbind(ortho_minimum, dunnsidak_orthopvalues)
 
 ortho_adjusted$dunnsidak_orthopvalues <- empPvals(-ortho_adjusted$dunnsidak_orthopvalues,-ortho_adjusted$dunnsidak_orthopvalues)
+
 ## Now I Transorm the DS adjusted ortho emp p to Z scores)
 z <- qnorm(1 - ortho_adjusted$dunnsidak_orthopvalues)
 
 
 # Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on tau_nolog
-# the mean is not on 0 (but on -0.60) and if you take random draws of size 1000 (thats more or less the size of my singificant picmin results) from this Z score column,
-# the mean keeps on staying around -0.60
 
 final <- cbind(ortho_adjusted,z)
 final <- final[is.finite(final$z),]
@@ -120,28 +117,13 @@ cat <- rep("Tissue Specificity - Tau", length(final_to_plot))
 
 df <- cbind(final_to_plot,cat)
 
-
-
-
-
 # Plot
 df1 <- as.data.frame(df)
 
-# df$final_to_plot <- as.numeric(df$final_to_plot)
-#
-#
-#
-#     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-#     geom_point(fill="black", color="black", size=4, shape = 16) +
-#     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-#     geom_point(aes(y=mean(my_hits_z1$z)),colour="red", shape = 17, size = 4) +
-#     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-#           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
 
 
-
-#### 2
+############################# 2
 my_data <- readRDS("220525_Athal_coexpression_node_stats.rds")
 
 
@@ -155,12 +137,12 @@ all <- my_data %>%
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
-# Here I take tau_nolog column and transform it into emp-p
+# Here I take 2nd column and transform it into emp-p
 annot <- all[,2]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
-### last column of all now has empirical p values for tau_nolog
+### last column of all now has empirical p values for 2nd col
 
 all <- cbind(all,mean_tau_emp_p)
 
@@ -175,8 +157,6 @@ colnames(ortho_count) <- c("Orthogroup", "Freq")
 
 all <- all %>%
   left_join(ortho_count, by = c("Orthogroup"))
-
-
 
 
 ### DS Correction per Orthogroup
@@ -198,13 +178,12 @@ dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$mean_tau_emp_p,ortho_
 ortho_adjusted <- cbind(ortho_minimum, dunnsidak_orthopvalues)
 
 ortho_adjusted$dunnsidak_orthopvalues <- empPvals(-ortho_adjusted$dunnsidak_orthopvalues,-ortho_adjusted$dunnsidak_orthopvalues)
+
 ## Now I Transorm the DS adjusted ortho emp p to Z scores)
 z <- qnorm(1 - ortho_adjusted$dunnsidak_orthopvalues)
 
 
-# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on tau_nolog
-# the mean is not on 0 (but on -0.60) and if you take random draws of size 1000 (thats more or less the size of my singificant picmin results) from this Z score column,
-# the mean keeps on staying around -0.60
+# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on 2nd col
 
 final <- cbind(ortho_adjusted,z)
 final <- final[is.finite(final$z),]
@@ -229,30 +208,13 @@ cat <- rep("Node Betweenness", length(final_to_plot))
 
 df <- cbind(final_to_plot,cat)
 
-
-
-
-
-
-
 # Plot
 df2 <- as.data.frame(df)
 
-# df$final_to_plot <- as.numeric(df$final_to_plot)
-#
-#
-#
-#     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-#     geom_point(fill="black", color="black", size=4, shape = 16) +
-#     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-#     geom_point(aes(y=mean(my_hits_z2$z)),colour="red", shape = 17, size = 4) +
-#     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-#           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
 
 
-
-# 3
+############################# 3
 
 my_data <- readRDS("220525_Athal_coexpression_node_stats.rds")
 
@@ -267,12 +229,12 @@ all <- my_data %>%
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
-# Here I take tau_nolog column and transform it into emp-p
+# Here I take 3rd col column and transform it into emp-p
 annot <- all[,3]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
-### last column of all now has empirical p values for tau_nolog
+### last column of all now has empirical p values for 3rd col
 
 all <- cbind(all,mean_tau_emp_p)
 
@@ -287,8 +249,6 @@ colnames(ortho_count) <- c("Orthogroup", "Freq")
 
 all <- all %>%
   left_join(ortho_count, by = c("Orthogroup"))
-
-
 
 
 ### DS Correction per Orthogroup
@@ -310,13 +270,12 @@ dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$mean_tau_emp_p,ortho_
 ortho_adjusted <- cbind(ortho_minimum, dunnsidak_orthopvalues)
 
 ortho_adjusted$dunnsidak_orthopvalues <- empPvals(-ortho_adjusted$dunnsidak_orthopvalues,-ortho_adjusted$dunnsidak_orthopvalues)
+
 ## Now I Transorm the DS adjusted ortho emp p to Z scores)
 z <- qnorm(1 - ortho_adjusted$dunnsidak_orthopvalues)
 
 
-# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on tau_nolog
-# the mean is not on 0 (but on -0.60) and if you take random draws of size 1000 (thats more or less the size of my singificant picmin results) from this Z score column,
-# the mean keeps on staying around -0.60
+# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on third col
 
 final <- cbind(ortho_adjusted,z)
 final <- final[is.finite(final$z),]
@@ -341,28 +300,13 @@ cat <- rep("Node Strength", length(final_to_plot))
 
 df <- cbind(final_to_plot,cat)
 
-
-
-
-
-
-
 # Plot
 df3 <- as.data.frame(df)
 
-# df$final_to_plot <- as.numeric(df$final_to_plot)
-#
-#
-#
-#     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-#     geom_point(fill="black", color="black", size=4, shape = 16) +
-#     geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-#     geom_point(aes(y=mean(my_hits_z3$z)),colour="red", shape = 17, size = 4) +
-#     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-#           axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
-#
 
-#### 4
+
+
+############################# 4
 my_data <- readRDS("220525_Athal_coexpression_node_stats.rds")
 
 
@@ -376,12 +320,12 @@ left_join(map, by = c("TAIR_gene"))
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
-# Here I take tau_nolog column and transform it into emp-p
+# Here I take 4th col column and transform it into emp-p
 annot <- all[,4]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
-### last column of all now has empirical p values for tau_nolog
+### last column of all now has empirical p values for 4th col
 
 all <- cbind(all,mean_tau_emp_p)
 
@@ -396,8 +340,6 @@ colnames(ortho_count) <- c("Orthogroup", "Freq")
 
 all <- all %>%
 left_join(ortho_count, by = c("Orthogroup"))
-
-
 
 
 ### DS Correction per Orthogroup
@@ -419,13 +361,12 @@ dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$mean_tau_emp_p,ortho_
 ortho_adjusted <- cbind(ortho_minimum, dunnsidak_orthopvalues)
 
 ortho_adjusted$dunnsidak_orthopvalues <- empPvals(-ortho_adjusted$dunnsidak_orthopvalues,-ortho_adjusted$dunnsidak_orthopvalues)
+
 ## Now I Transorm the DS adjusted ortho emp p to Z scores)
 z <- qnorm(1 - ortho_adjusted$dunnsidak_orthopvalues)
 
 
-# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on tau_nolog
-# the mean is not on 0 (but on -0.60) and if you take random draws of size 1000 (thats more or less the size of my singificant picmin results) from this Z score column,
-# the mean keeps on staying around -0.60
+# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on 4th col
 
 final <- cbind(ortho_adjusted,z)
 final <- final[is.finite(final$z),]
@@ -450,29 +391,13 @@ cat <- rep("Node Degree", length(final_to_plot))
 
 df <- cbind(final_to_plot,cat)
 
-
-
-
-
-
-
 # Plot
 df4 <- as.data.frame(df)
 
-# df$final_to_plot <- as.numeric(df$final_to_plot)
-#
-#
-#
-# ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-# geom_point(fill="black", color="black", size=4, shape = 16) +
-# geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
-# geom_point(aes(y=mean(my_hits_z4$z)),colour="red", shape = 17, size = 4) +
-# theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-# axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.1,0.1,0.2), linetype="dotted")
 
 
 
-#### 5
+############################# 5
 my_data <- readRDS("220525_Athal_coexpression_node_stats.rds")
 
 
@@ -486,12 +411,12 @@ all <- my_data %>%
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
-# Here I take tau_nolog column and transform it into emp-p
+# Here I take 5th col column and transform it into emp-p
 annot <- all[,5]
 
 mean_tau_emp_p <- assign.pvalues(annot)
 
-### last column of all now has empirical p values for tau_nolog
+### last column of all now has empirical p values for 5th col
 
 all <- cbind(all,mean_tau_emp_p)
 
@@ -506,8 +431,6 @@ colnames(ortho_count) <- c("Orthogroup", "Freq")
 
 all <- all %>%
   left_join(ortho_count, by = c("Orthogroup"))
-
-
 
 
 ### DS Correction per Orthogroup
@@ -533,9 +456,7 @@ ortho_adjusted$dunnsidak_orthopvalues <- empPvals(-ortho_adjusted$dunnsidak_orth
 z <- qnorm(1 - ortho_adjusted$dunnsidak_orthopvalues)
 
 
-# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on tau_nolog
-# the mean is not on 0 (but on -0.60) and if you take random draws of size 1000 (thats more or less the size of my singificant picmin results) from this Z score column,
-# the mean keeps on staying around -0.60
+# Final file. Last column has the Z scores for all the Orthogroup in A thaliana based on 5th col
 
 final <- cbind(ortho_adjusted,z)
 final <- final[is.finite(final$z),]
@@ -566,17 +487,27 @@ df <- cbind(final_to_plot,cat)
 
 
 
-# Plot
+# Plot All
 df5 <- as.data.frame(df)
 df <- rbind(df1,df2,df3,df4,df5)
 
 df$final_to_plot <- as.numeric(df$final_to_plot)
+df1$final_to_plot <- as.numeric(df1$final_to_plot)
+df2$final_to_plot <- as.numeric(df2$final_to_plot)
+df3$final_to_plot <- as.numeric(df3$final_to_plot)
+df4$final_to_plot <- as.numeric(df4$final_to_plot)
+df5$final_to_plot <- as.numeric(df5$final_to_plot)
 
 
 
     ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
     geom_point(fill="black", color="black", size=4, shape = 16) +
-    geom_linerange(aes(ymin = quantile(df$final_to_plot,0.05), ymax = quantile(df$final_to_plot,0.95)), size = 1.5) + theme_classic() + coord_flip() +
+    geom_linerange(aes(x = "Tissue Specificity - Tau",ymin = quantile(df1$final_to_plot,0.05), ymax = quantile(df1$final_to_plot,0.95)), size = 1.5) +
+    geom_linerange(aes(x = "Node Betweenness",ymin = quantile(df2$final_to_plot,0.05), ymax = quantile(df2$final_to_plot,0.95)), size = 1.5) +
+    geom_linerange(aes(x = "Node Strength",ymin = quantile(df3$final_to_plot,0.05), ymax = quantile(df3$final_to_plot,0.95)), size = 1.5) +
+    geom_linerange(aes(x = "Node Degree",ymin = quantile(df4$final_to_plot,0.05), ymax = quantile(df4$final_to_plot,0.95)), size = 1.5) +
+    geom_linerange(aes(x = "Node Closeness",ymin = quantile(df5$final_to_plot,0.05), ymax = quantile(df5$final_to_plot,0.95)), size = 1.5) +
+    theme_classic() + coord_flip() +
     geom_point(aes(y=mean(my_hits_z1$z), x = "Tissue Specificity - Tau"),colour="red", shape = 17, size = 4) +
     geom_point(aes(y=mean(my_hits_z2$z), x = "Node Betweenness"),colour="red", shape = 17, size = 4) +
     geom_point(aes(y=mean(my_hits_z3$z), x = "Node Strength"),colour="red", shape = 17, size = 4) +

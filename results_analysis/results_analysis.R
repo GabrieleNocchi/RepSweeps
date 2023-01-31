@@ -68,14 +68,14 @@ genes_with_OG_paralogues_count <- genes_with_OG %>%
 
 
 
-  colnames(genes_with_OG_paralogues_count) <- c("gene", "min_CLR", "scan_n", "average_gene_CLR_emp_p", "orthogroup", "ortho_size" )
+  colnames(genes_with_OG_paralogues_count) <- c("gene", "min_CLR", "scan_n", "mean_emp_p", "orthogroup", "ortho_size" )
 
 
 
 # Og paralogues DS correction
 
 
-ortho_minimum <- genes_with_OG_paralogues_count %>% group_by(orthogroup) %>% slice(which.min(average_gene_CLR_emp_p))
+ortho_minimum <- genes_with_OG_paralogues_count %>% group_by(orthogroup) %>% slice(which.min(mean_emp_p))
 
 ortho_minimum <- data.frame(ortho_minimum)
 
@@ -84,7 +84,7 @@ gabriele_dunnsidak <- function(x, y){
 }
 
 
-dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$average_gene_CLR_emp_p,ortho_minimum$ortho_size)
+dunnsidak_orthopvalues <- gabriele_dunnsidak(ortho_minimum$mean_emp_p,ortho_minimum$ortho_size)
 
 
 ortho_adjusted <- cbind(ortho_minimum, dunnsidak_orthopvalues)

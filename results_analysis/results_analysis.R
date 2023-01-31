@@ -66,7 +66,7 @@ genes_with_OG_paralogues_count <- genes_with_OG %>%
 
   genes_with_OG_paralogues_count$mean_CLR <- emp_p
 
-
+  # mean_emp_p is the mean_CLR of the gene converted to emp_p value, hence mean_emp_p
 
   colnames(genes_with_OG_paralogues_count) <- c("gene", "min_CLR", "scan_n", "mean_emp_p", "orthogroup", "ortho_size" )
 

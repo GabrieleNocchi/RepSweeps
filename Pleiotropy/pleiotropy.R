@@ -2,7 +2,7 @@
 # map is what I use to link TAIR_gene to Orthogroup_ID
 my_hits <- readRDS("gab_picmin_results.rds")
 my_hits <- my_hits$picmin_res
-my_hits <- my_hits[my_hits$picmin_fdr < 0.4,]
+my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
@@ -101,14 +101,14 @@ my_hits_z1 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-###DRAWS
+### DRAWS
 
-my_list <- replicate(1000,sample_n(final, 120))
+my_list <- replicate(10000,sample_n(final, 250))
 
 final_to_plot <- c()
 
 
-for (i in 1:1000) {
+for (i in 1:10000) {
     final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
 }
 
@@ -194,12 +194,14 @@ my_hits_z2 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-my_list <- replicate(1000,sample_n(final, 120))
+### DRAWS
+
+my_list <- replicate(10000,sample_n(final, 250))
 
 final_to_plot <- c()
 
 
-for (i in 1:1000) {
+for (i in 1:10000) {
     final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
 }
 
@@ -286,12 +288,14 @@ my_hits_z3 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-my_list <- replicate(1000,sample_n(final, 120))
+### DRAWS
+
+my_list <- replicate(10000,sample_n(final, 250))
 
 final_to_plot <- c()
 
 
-for (i in 1:1000) {
+for (i in 1:10000) {
     final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
 }
 
@@ -377,12 +381,14 @@ my_hits_z4 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-my_list <- replicate(1000,sample_n(final, 120))
+### DRAWS
+
+my_list <- replicate(10000,sample_n(final, 250))
 
 final_to_plot <- c()
 
 
-for (i in 1:1000) {
+for (i in 1:10000) {
 final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
 }
 
@@ -467,12 +473,14 @@ my_hits_z5 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-my_list <- replicate(1000,sample_n(final, 120))
+### DRAWS
+
+my_list <- replicate(10000,sample_n(final, 250))
 
 final_to_plot <- c()
 
 
-for (i in 1:1000) {
+for (i in 1:10000) {
     final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
 }
 
@@ -513,5 +521,6 @@ df5$final_to_plot <- as.numeric(df5$final_to_plot)
     geom_point(aes(y=mean(my_hits_z3$z), x = "Node Strength"),colour="red", shape = 17, size = 4) +
     geom_point(aes(y=mean(my_hits_z4$z), x = "Node Degree"),colour="red", shape = 17, size = 4) +
     geom_point(aes(y=mean(my_hits_z5$z), x = "Node Closeness"),colour="red", shape = 17, size = 4) +
-    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted")
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) +
+    ylab("Mean Orthogroup Z score") + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted") +
+    scale_y_continuous(breaks = c(-0.3,-0.2,-0.1,0.1,0.2,0.3), limit = c(-0.3,0.3))

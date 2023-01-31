@@ -514,4 +514,4 @@ df5$final_to_plot <- as.numeric(df5$final_to_plot)
     geom_point(aes(y=mean(my_hits_z4$z), x = "Node Degree"),colour="red", shape = 17, size = 4) +
     geom_point(aes(y=mean(my_hits_z5$z), x = "Node Closeness"),colour="red", shape = 17, size = 4) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),
-          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.2,-0.15,-0.1,0.1,0.15,0.2), linetype="dotted")
+          axis.ticks.y=element_blank()) + ylab("Mean Orthogroup Z score") + ylim(-0.3,0.3) + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted")

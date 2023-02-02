@@ -2,7 +2,7 @@ data <-readRDS("gab_picmin_results.rds")
 data <- data$picmin_res
 
 
-fir <- data[data$picmin_fdr < 0.5 & data$picmin_fdr > 0.4,]
+fir <- data[data$picmin_fdr <= 0.5 & data$picmin_fdr > 0.4,]
 
 sec <- data[data$picmin_fdr <= 0.4 & data$picmin_fdr > 0.3,]
 thi <- data[data$picmin_fdr <= 0.3 & data$picmin_fdr > 0.2,]

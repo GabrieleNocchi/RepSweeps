@@ -1,3 +1,4 @@
+library(ggplot2)
 data <-readRDS("gab_picmin_results.rds")
 data <- data$picmin_res
 

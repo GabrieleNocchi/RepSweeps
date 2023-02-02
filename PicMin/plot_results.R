@@ -94,7 +94,7 @@ p3 <- ggplot(final_data, aes(x = reorder(species, contribution),y = 1, fill = co
         axis.line.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
-        xlab("species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.5 = N(OG p< 0.1)/N(OG p)")
+        xlab("species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
 
 
 library(gridExtra)

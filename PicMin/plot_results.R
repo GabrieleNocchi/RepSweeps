@@ -35,4 +35,4 @@ ggplot(my_data, aes(fill=FDR, y=count, x=picmin)) +
         scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = -1) +
         coord_flip() +
         scale_y_continuous(breaks=seq(0,280,20), position = "right") +
-        ggtitle(paste("Total number of OGs tested in PicMin = ", format(round(as.numeric(length(data$p)), 1), big.mark=",")))
+        ggtitle(paste("PicMin OGs = ", format(round(as.numeric(length(data$p)), 1), big.mark=",")))

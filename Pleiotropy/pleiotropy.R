@@ -8,6 +8,9 @@ my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
 
 
+to_crop <- readRDS("gab_picmin_results.rds")
+to_crop <- to_crop$picmin_res
+
 map <- readRDS("OG_map_Athal_COMBINED25species_updatedOF_221213.rds")
 
 assign.pvalues <- function(array){
@@ -59,6 +62,12 @@ all <- my_data %>%
 
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
+
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:17]
 
 # Here I take tau_nolog column and transform it into emp-p
 annot <- all[,4]
@@ -152,6 +161,13 @@ all <- my_data %>%
 
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
+
+
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
 
 # Here I take 2nd column and transform it into emp-p
 annot <- all[,2]
@@ -247,6 +263,13 @@ all <- my_data %>%
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
+
+
 # Here I take 3rd col column and transform it into emp-p
 annot <- all[,3]
 
@@ -340,6 +363,15 @@ left_join(map, by = c("TAIR_gene"))
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
+
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
+
+
+
 # Here I take 4th col column and transform it into emp-p
 annot <- all[,4]
 
@@ -432,6 +464,12 @@ all <- my_data %>%
 
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
+
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
 
 # Here I take 5th col column and transform it into emp-p
 annot <- all[,5]
@@ -527,6 +565,12 @@ all <- my_data %>%
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
+
 # Here I take 2nd column and transform it into emp-p
 annot <- all[,2]
 
@@ -621,6 +665,12 @@ all <- my_data %>%
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
+
 # Here I take 3rd col column and transform it into emp-p
 annot <- all[,3]
 
@@ -714,6 +764,12 @@ left_join(map, by = c("biomart_gene"))
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
 
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
+
 # Here I take 4th col column and transform it into emp-p
 annot <- all[,4]
 
@@ -806,6 +862,12 @@ all <- my_data %>%
 
 # This line below as there are some NAs in the table that cause issues later
 all<-all[complete.cases(all), ]
+
+#### Taking care of using only the OGs I tested in PicMin
+all <- all %>%
+  left_join(to_crop, by = c("Orthogroup"))
+  all<-all[complete.cases(all), ]
+  all <- all[,1:16]
 
 # Here I take 5th col column and transform it into emp-p
 annot <- all[,5]

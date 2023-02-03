@@ -959,18 +959,58 @@ df9$final_to_plot <- as.numeric(df9$final_to_plot)
 
 
 
-    ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="black", color="black", size=4, shape = 16) +
-    geom_linerange(aes(x = "Arabidopsis Tissue Specificity - Tau",ymin = quantile(df1$final_to_plot,0.05), ymax = quantile(df1$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Betweenness",ymin = quantile(df2$final_to_plot,0.05), ymax = quantile(df2$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Strength",ymin = quantile(df3$final_to_plot,0.05), ymax = quantile(df3$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Degree",ymin = quantile(df4$final_to_plot,0.05), ymax = quantile(df4$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Closeness",ymin = quantile(df5$final_to_plot,0.05), ymax = quantile(df5$final_to_plot,0.95)), size = 1.5) +
+### test to make plot less heavy for PDF
+a <- mean(as.numeric(df1$final_to_plot))
+a1 <- quantile(df1$final_to_plot,0.05)
+a2 <- quantile(df1$final_to_plot,0.95)
+b <- mean(as.numeric(df2$final_to_plot))
+b1 <- quantile(df2$final_to_plot,0.05)
+b2 <- quantile(df2$final_to_plot,0.95)
+c <- mean(as.numeric(df3$final_to_plot))
+c1 <- quantile(df3$final_to_plot,0.05)
+c2 <- quantile(df3$final_to_plot,0.95)
+d <- mean(as.numeric(df4$final_to_plot))
+d1 <- quantile(df4$final_to_plot,0.05)
+d2 <- quantile(df4$final_to_plot,0.95)
+e <- mean(as.numeric(df5$final_to_plot))
+e1 <- quantile(df5$final_to_plot,0.05)
+e2 <- quantile(df5$final_to_plot,0.95)
+f <- mean(as.numeric(df6$final_to_plot))
+f1 <- quantile(df6$final_to_plot,0.05)
+f2 <- quantile(df6$final_to_plot,0.95)
+g <- mean(as.numeric(df7$final_to_plot))
+g1 <- quantile(df7$final_to_plot,0.05)
+g2 <- quantile(df7$final_to_plot,0.95)
+h <- mean(as.numeric(df8$final_to_plot))
+h1 <- quantile(df8$final_to_plot,0.05)
+h2 <- quantile(df8$final_to_plot,0.95)
+i <- mean(as.numeric(df9$final_to_plot))
+i1 <- quantile(df9$final_to_plot,0.05)
+i2 <- quantile(df9$final_to_plot,0.95)
 
-    geom_linerange(aes(x = "Medicago Node Betweenness",ymin = quantile(df6$final_to_plot,0.05), ymax = quantile(df6$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Medicago Node Strength",ymin = quantile(df7$final_to_plot,0.05), ymax = quantile(df7$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Medicago Node Degree",ymin = quantile(df8$final_to_plot,0.05), ymax = quantile(df8$final_to_plot,0.95)), size = 1.5) +
-    geom_linerange(aes(x = "Medicago Node Closeness",ymin = quantile(df9$final_to_plot,0.05), ymax = quantile(df9$final_to_plot,0.95)), size = 1.5) +
+
+df <- rbind(a,b,c,d,e,f,g,h,i)
+cat <- c("Arabidopsis Tissue Specificity - Tau","Arabidopsis Node Betweenness","Arabidopsis Node Strength","Arabidopsis Node Degree","Arabidopsis Node Closeness","Medicago Node Betweenness","Medicago Node Strength","Medicago Node Degree","Medicago Node Closeness")
+df <- cbind(df,cat)
+colnames(df) <- c("final_to_plot", "cat")
+
+
+df <-as.data.frame(df)
+df$final_to_plot <- as.numeric(df$final_to_plot)
+
+
+    ggplot(df, aes(cat, (final_to_plot))) +        # ggplot2 plot with confidence intervals
+    geom_point(fill="black", color="black", size=4, shape = 16) +
+    geom_linerange(aes(x = "Arabidopsis Tissue Specificity - Tau",ymin = a1, ymax = a2), size = 1.5) +
+    geom_linerange(aes(x = "Arabidopsis Node Betweenness",ymin = b1, ymax = b2), size = 1.5) +
+    geom_linerange(aes(x = "Arabidopsis Node Strength",ymin = c1, ymax = c2), size = 1.5) +
+    geom_linerange(aes(x = "Arabidopsis Node Degree",ymin = d1, ymax = d2), size = 1.5) +
+    geom_linerange(aes(x = "Arabidopsis Node Closeness",ymin = e1, ymax = e2), size = 1.5) +
+
+    geom_linerange(aes(x = "Medicago Node Betweenness",ymin = f1, ymax = f2), size = 1.5) +
+    geom_linerange(aes(x = "Medicago Node Strength",ymin = g1, ymax = g2), size = 1.5) +
+    geom_linerange(aes(x = "Medicago Node Degree",ymin = h1, ymax = h2), size = 1.5) +
+    geom_linerange(aes(x = "Medicago Node Closeness",ymin = i1, ymax = i2), size = 1.5) +
     theme_classic() + coord_flip() +
     geom_point(aes(y=mean(my_hits_z1$z), x = "Arabidopsis Tissue Specificity - Tau"),colour="red", shape = 17, size = 4) +
     geom_point(aes(y=mean(my_hits_z2$z), x = "Arabidopsis Node Betweenness"),colour="red", shape = 17, size = 4) +
@@ -985,3 +1025,32 @@ df9$final_to_plot <- as.numeric(df9$final_to_plot)
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) +
     ylab("Mean Orthogroup Z score") + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted") +
     scale_y_continuous(breaks = c(-0.3,-0.2,-0.1,0.1,0.2,0.3), limit = c(-0.5,0.5)) +annotate("text",x="" ,y=0.44,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-0.45,label="Low Pleiotropy",fontface = "bold")
+
+
+
+    # ggplot(df, aes(cat, mean(final_to_plot))) +        # ggplot2 plot with confidence intervals
+    # geom_point(fill="black", color="black", size=4, shape = 16) +
+    # geom_linerange(aes(x = "Arabidopsis Tissue Specificity - Tau",ymin = quantile(df1$final_to_plot,0.05), ymax = quantile(df1$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Arabidopsis Node Betweenness",ymin = quantile(df2$final_to_plot,0.05), ymax = quantile(df2$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Arabidopsis Node Strength",ymin = quantile(df3$final_to_plot,0.05), ymax = quantile(df3$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Arabidopsis Node Degree",ymin = quantile(df4$final_to_plot,0.05), ymax = quantile(df4$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Arabidopsis Node Closeness",ymin = quantile(df5$final_to_plot,0.05), ymax = quantile(df5$final_to_plot,0.95)), size = 1.5) +
+    #
+    # geom_linerange(aes(x = "Medicago Node Betweenness",ymin = quantile(df6$final_to_plot,0.05), ymax = quantile(df6$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Medicago Node Strength",ymin = quantile(df7$final_to_plot,0.05), ymax = quantile(df7$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Medicago Node Degree",ymin = quantile(df8$final_to_plot,0.05), ymax = quantile(df8$final_to_plot,0.95)), size = 1.5) +
+    # geom_linerange(aes(x = "Medicago Node Closeness",ymin = quantile(df9$final_to_plot,0.05), ymax = quantile(df9$final_to_plot,0.95)), size = 1.5) +
+    # theme_classic() + coord_flip() +
+    # geom_point(aes(y=mean(my_hits_z1$z), x = "Arabidopsis Tissue Specificity - Tau"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z2$z), x = "Arabidopsis Node Betweenness"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z3$z), x = "Arabidopsis Node Strength"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z4$z), x = "Arabidopsis Node Degree"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z5$z), x = "Arabidopsis Node Closeness"),colour="red", shape = 17, size = 4) +
+    #
+    # geom_point(aes(y=mean(my_hits_z6$z), x = "Medicago Node Betweenness"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z7$z), x = "Medicago Node Strength"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z8$z), x = "Medicago Node Degree"),colour="red", shape = 17, size = 4) +
+    # geom_point(aes(y=mean(my_hits_z9$z), x = "Medicago Node Closeness"),colour="red", shape = 17, size = 4) +
+    # theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) +
+    # ylab("Mean Orthogroup Z score") + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted") +
+    # scale_y_continuous(breaks = c(-0.3,-0.2,-0.1,0.1,0.2,0.3), limit = c(-0.5,0.5)) +annotate("text",x="" ,y=0.44,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-0.45,label="Low Pleiotropy",fontface = "bold")

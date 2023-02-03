@@ -94,8 +94,12 @@ p3 <- ggplot(final_data, aes(x = reorder(species, contribution),y = 1, fill = co
         axis.line.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
-        xlab("species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
+        xlab("Species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
+
+
+        p4 <- ggplot(data=final_data, aes(x=species, y=contribution*100, fill = species)) +
+        geom_bar(stat="identity", width = 0.6) + coord_flip() + theme_classic() + xlab("Species") + ylab("Contribution %") + scale_fill_manual(values = mycolors) + labs(fill='Species') + theme(legend.position = "none")
 
 
 library(gridExtra)
-grid.arrange(p1,p2,p3,ncol=1)
+grid.arrange(p1, p3, p4,p2,heights = c(1,1, 1,1))

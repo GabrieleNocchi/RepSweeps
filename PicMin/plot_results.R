@@ -55,7 +55,7 @@ library(dplyr)
 data <- pic %>% left_join(results, by = c("Orthogroup"))
 
 
-p2<- ggplot(data, aes(x=species, y=ortho_DS)) +
+p2<- ggplot(data, aes(x=reorder(species, ortho_DS, FUN = median), y=ortho_DS)) +
     geom_boxplot() + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.5 (280 OGs)") + xlab("Species")
 
 library(dplyr)

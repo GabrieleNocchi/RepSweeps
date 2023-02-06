@@ -32,7 +32,7 @@ p1 <- ggplot(my_data, aes(fill=FDR, y=count, x=picmin)) +
         axis.line.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) + ylab("OG count\n") +
-        scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = -1) +
+        scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = -1, option  = "cividis") +
         coord_flip() +
         scale_y_continuous(breaks=seq(0,280,20), position = "right") +
         ggtitle(paste("PicMin OGs = ", format(round(as.numeric(length(data$p)), 1), big.mark=",")))
@@ -53,11 +53,10 @@ results <- readRDS("orthogroup_results.rds")
 
 library(dplyr)
 data <- pic %>% left_join(results, by = c("Orthogroup"))
-mycolors = c(brewer.pal(name="Dark2", n = 8), brewer.pal(name="Paired", n = 6))
 
-p2<- ggplot(data, aes(x=reorder(species, ortho_DS, FUN = median), y=ortho_DS, fill = species)) +
-    geom_boxplot(width = 0.5) + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.5 (280 OGs)") + xlab("Species") +
-    scale_fill_manual(values = mycolors)
+
+p2<- ggplot(data, aes(x=species, y=ortho_DS)) +
+    geom_boxplot() + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.5 (280 OGs)") + xlab("Species")
 
 library(dplyr)
 low_p_count <- data %>% group_by(species) %>% count(ortho_DS < 0.1)
@@ -88,7 +87,7 @@ final_data <- cbind(reformatted_data,contribution)
 
 library(ggplot2)
 
-p3 <- ggplot(final_data, aes(x = reorder(species, contribution),y = 1, fill = contribution)) + scale_fill_gradient(low="grey", high="blue") + theme_classic() +
+p3 <- ggplot(final_data, aes(x = reorder(species, contribution),y = 1, fill = contribution)) + scale_fill_viridis_c(direction = 1, option  = "cividis") + theme_classic() +
   geom_tile(height =0.5) +
   theme(axis.title.y=element_blank(),
         axis.line.y=element_blank(),
@@ -97,8 +96,8 @@ p3 <- ggplot(final_data, aes(x = reorder(species, contribution),y = 1, fill = co
         xlab("Species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
 
 
-        p4 <- ggplot(data=final_data, aes(x=species, y=contribution*100, fill = species)) +
-        geom_bar(stat="identity", width = 0.6) + coord_flip() + theme_classic() + xlab("Species") + ylab("Contribution %") + scale_fill_manual(values = mycolors) + labs(fill='Species') + theme(legend.position = "none")
+        p4 <- ggplot(data=final_data, aes(x=species, y=contribution*100)) +
+        geom_bar(stat="identity", width = 0.6,fill = "black") + coord_flip() + theme_classic() + xlab("Species") + ylab("Contribution %") + labs(fill='Species') + theme(legend.position = "none")
 
 
 library(gridExtra)

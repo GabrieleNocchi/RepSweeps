@@ -11,7 +11,7 @@ my_data <- results %>% group_by(species, ortho_size) %>%
 
 
   p1 <-   ggplot(my_data, aes(fill=as.factor(ortho_size), y=total_count, x=species)) +
-    geom_bar(stat="identity", width = 0.8, position = position_stack(reverse = TRUE)) + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1) +
+    geom_bar(stat="identity", width = 0.8, position = position_stack(reverse = TRUE)) + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "cividis") +
     labs(fill='Paralogues N') + ylab("Number") + xlab("Species") + ggtitle("Paralogues Number per Orthogroup") +
 theme(legend.key.size = unit(0.2, 'cm'), plot.title = element_text(size = 10, face = "bold"))
 
@@ -30,7 +30,7 @@ theme(legend.key.size = unit(0.2, 'cm'), plot.title = element_text(size = 10, fa
 
 
     p2 <- ggplot(data=total, aes(x=Var1, y=Freq, fill = Var1)) +
-    geom_bar(stat="identity") + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1) + xlab("Number of Orthologues") + ylab("Number") + ggtitle("Total Number of OGs by orthologues Number\nPicMin used only OGs with at least 7 Orthologues")+
+    geom_bar(stat="identity") + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "cividis") + xlab("Number of Orthologues") + ylab("Number") + ggtitle("Total Number of OGs by orthologues Number\nPicMin used only OGs with at least 7 Orthologues")+
       labs(fill='Orthologues N') +
   theme(legend.key.size = unit(0.2, 'cm'),plot.title = element_text(size = 10, face = "bold"))
 
@@ -46,7 +46,7 @@ theme(legend.key.size = unit(0.2, 'cm'), plot.title = element_text(size = 10, fa
 
 
     p3 <- ggplot(my_data_3, aes(fill=as.factor(total_count), y=number, x=species)) +
-    geom_bar(stat="identity", width = 0.8) + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1) +
+    geom_bar(stat="identity", width = 0.8) + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "cividis") +
     labs(fill='Species N') + ylab("Number") + xlab("Species") + ggtitle("Species Number per Orthogroup in each Species") +
 theme(legend.key.size = unit(0.2, 'cm'),plot.title = element_text(size = 10, face = "bold"))
 
@@ -55,6 +55,12 @@ theme(legend.key.size = unit(0.2, 'cm'),plot.title = element_text(size = 10, fac
 
 
 pdf("OGs_assement.pdf")
+library(gridExtra)
+grid.arrange(p1,p3,p2,ncol=1)
+dev.off()
+
+
+svg("OGs_assement.svg")
 library(gridExtra)
 grid.arrange(p1,p3,p2,ncol=1)
 dev.off()

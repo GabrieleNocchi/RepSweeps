@@ -2,7 +2,7 @@
 # map is what I use to link TAIR_gene to Orthogroup_ID
 my_hits <- readRDS("gab_picmin_results.rds")
 my_hits <- my_hits$picmin_res
-my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
+my_hits <- my_hits[my_hits$picmin_fdr < 0.4,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
@@ -11,7 +11,8 @@ colnames(my_hits) <- "Orthogroup"
 to_crop <- readRDS("gab_picmin_results.rds")
 to_crop <- to_crop$picmin_res
 
-map <- readRDS("OG_map_Athal_COMBINED25species_updatedOF_221213.rds")
+map <- read.table("Athal_map_OG_GAB.txt", fill = TRUE, h = T)
+colnames(map) <- c("ID","GENE_COORD","TAIR_gene","GENE_NAME", "Orthogroup")
 
 assign.pvalues <- function(array){
   #array <- sample(sw, 1000)
@@ -67,7 +68,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:17]
+  all <- all[,1:15]
 
 # Here I take tau_nolog column and transform it into emp-p
 annot <- all[,4]
@@ -149,7 +150,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 # Here I take 2nd column and transform it into emp-p
 annot <- all[,2]
@@ -235,7 +236,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 
 # Here I take 3rd col column and transform it into emp-p
@@ -321,7 +322,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 
 
@@ -406,7 +407,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 # Here I take 5th col column and transform it into emp-p
 annot <- all[,5]
@@ -474,7 +475,8 @@ z5 <- sum(my_hits_z5$z)/(sqrt(length(my_hits_z5$z)))
 
 
 ### MEDICAGO
-map <- readRDS("OG_map_Mtrunc_COMBINED25species_updatedOF_221213.rds")
+map <- read.table("Mtrunc_map_OG_GAB.txt", fill = TRUE, h = T)
+colnames(map) <- c("ID","GENE_COORD","GENE_NAME", "biomart_gene", "Orthogroup")
 ############################# 6
 my_data <- readRDS("220927_Mtrunc_coexpression_node_stats.rds")
 
@@ -493,7 +495,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 # Here I take 2nd column and transform it into emp-p
 annot <- all[,2]
@@ -578,7 +580,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 # Here I take 3rd col column and transform it into emp-p
 annot <- all[,3]
@@ -662,7 +664,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 # Here I take 4th col column and transform it into emp-p
 annot <- all[,4]
@@ -744,7 +746,7 @@ all<-all[complete.cases(all), ]
 all <- all %>%
   left_join(to_crop, by = c("Orthogroup"))
   all<-all[complete.cases(all), ]
-  all <- all[,1:16]
+  all <- all[,1:14]
 
 # Here I take 5th col column and transform it into emp-p
 annot <- all[,5]

@@ -2,7 +2,7 @@
 # map is what I use to link TAIR_gene to Orthogroup_ID
 my_hits <- readRDS("gab_picmin_results.rds")
 my_hits <- my_hits$picmin_res
-my_hits <- my_hits[my_hits$picmin_fdr < 0.4,]
+my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
@@ -126,25 +126,7 @@ my_hits_z <- my_hits %>%
 my_hits_z1 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
-
-### DRAWS
-
-my_list <- replicate(10000,sample_n(final, 30))
-
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Arabidopsis Tissue Specificity - Tau", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df1 <- as.data.frame(df)
+z1 <- sum(my_hits_z1$z)/(sqrt(length(my_hits_z1$z)))
 
 
 
@@ -227,24 +209,10 @@ my_hits_z2 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
-
-final_to_plot <- c()
+z2 <- sum(my_hits_z2$z)/(sqrt(length(my_hits_z2$z)))
 
 
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Arabidopsis Node Betweenness", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df2 <- as.data.frame(df)
 
 
 
@@ -328,24 +296,9 @@ my_hits_z3 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+z3 <- sum(my_hits_z3$z)/(sqrt(length(my_hits_z3$z)))
 
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Arabidopsis Node Strength", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df3 <- as.data.frame(df)
 
 
 
@@ -430,24 +383,8 @@ my_hits_z4 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
+z4 <- sum(my_hits_z4$z)/(sqrt(length(my_hits_z4$z)))
 
-my_list <- replicate(10000,sample_n(final, 30))
-
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Arabidopsis Node Degree", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df4 <- as.data.frame(df)
 
 
 
@@ -528,22 +465,9 @@ my_hits_z5 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+z5 <- sum(my_hits_z5$z)/(sqrt(length(my_hits_z5$z)))
 
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Arabidopsis Node Closeness", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-df5 <- as.data.frame(df)
 
 
 
@@ -630,24 +554,9 @@ my_hits_z6 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
-
-my_list <- replicate(10000,sample_n(final, 30))
-
-final_to_plot <- c()
+z6 <- sum(my_hits_z6$z)/(sqrt(length(my_hits_z6$z)))
 
 
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Medicago Node Betweenness", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df6 <- as.data.frame(df)
 
 
 
@@ -730,24 +639,9 @@ my_hits_z7 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+z7 <- sum(my_hits_z7$z)/(sqrt(length(my_hits_z7$z)))
 
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Medicago Node Strength", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df7 <- as.data.frame(df)
 
 
 
@@ -829,24 +723,7 @@ my_hits_z8 <-my_hits_z[complete.cases(my_hits_z), ]
 
 
 
-### DRAWS
-
-my_list <- replicate(10000,sample_n(final, 30))
-
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Medicago Node Degree", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-
-# Plot
-df8 <- as.data.frame(df)
+z8 <- sum(my_hits_z8$z)/(sqrt(length(my_hits_z8$z)))
 
 
 
@@ -925,105 +802,24 @@ my_hits_z <- my_hits %>%
   left_join(final, by = c("Orthogroup"))
 my_hits_z9 <-my_hits_z[complete.cases(my_hits_z), ]
 
+z9 <- sum(my_hits_z9$z)/(sqrt(length(my_hits_z9$z)))
 
-
-### DRAWS
-
-my_list <- replicate(10000,sample_n(final, 30))
-
-final_to_plot <- c()
-
-
-for (i in 1:10000) {
-    final_to_plot <- append(final_to_plot,mean(my_list[,i]$z))
-}
-
-
-cat <- rep("Medicago Node Closeness", length(final_to_plot))
-
-df <- cbind(final_to_plot,cat)
-df9 <- as.data.frame(df)
-
-# Plot All
-
-df <- rbind(df1,df2,df3,df4,df5,df6,df7,df8,df9)
-
-df$final_to_plot <- as.numeric(df$final_to_plot)
-df1$final_to_plot <- as.numeric(df1$final_to_plot)
-df2$final_to_plot <- as.numeric(df2$final_to_plot)
-df3$final_to_plot <- as.numeric(df3$final_to_plot)
-df4$final_to_plot <- as.numeric(df4$final_to_plot)
-df5$final_to_plot <- as.numeric(df5$final_to_plot)
-df6$final_to_plot <- as.numeric(df6$final_to_plot)
-df7$final_to_plot <- as.numeric(df7$final_to_plot)
-df8$final_to_plot <- as.numeric(df8$final_to_plot)
-df9$final_to_plot <- as.numeric(df9$final_to_plot)
-
-
-
-### test to make plot less heavy for PDF
-a <- mean(as.numeric(df1$final_to_plot))
-a1 <- quantile(df1$final_to_plot,0.025)
-a2 <- quantile(df1$final_to_plot,0.975)
-b <- mean(as.numeric(df2$final_to_plot))
-b1 <- quantile(df2$final_to_plot,0.025)
-b2 <- quantile(df2$final_to_plot,0.975)
-c <- mean(as.numeric(df3$final_to_plot))
-c1 <- quantile(df3$final_to_plot,0.025)
-c2 <- quantile(df3$final_to_plot,0.975)
-d <- mean(as.numeric(df4$final_to_plot))
-d1 <- quantile(df4$final_to_plot,0.025)
-d2 <- quantile(df4$final_to_plot,0.975)
-e <- mean(as.numeric(df5$final_to_plot))
-e1 <- quantile(df5$final_to_plot,0.025)
-e2 <- quantile(df5$final_to_plot,0.975)
-f <- mean(as.numeric(df6$final_to_plot))
-f1 <- quantile(df6$final_to_plot,0.025)
-f2 <- quantile(df6$final_to_plot,0.975)
-g <- mean(as.numeric(df7$final_to_plot))
-g1 <- quantile(df7$final_to_plot,0.025)
-g2 <- quantile(df7$final_to_plot,0.975)
-h <- mean(as.numeric(df8$final_to_plot))
-h1 <- quantile(df8$final_to_plot,0.025)
-h2 <- quantile(df8$final_to_plot,0.975)
-i <- mean(as.numeric(df9$final_to_plot))
-i1 <- quantile(df9$final_to_plot,0.025)
-i2 <- quantile(df9$final_to_plot,0.975)
-
-
-df <- rbind(a,b,c,d,e,f,g,h,i)
-cat <- c("Arabidopsis Tissue Specificity - Tau","Arabidopsis Node Betweenness","Arabidopsis Node Strength","Arabidopsis Node Degree","Arabidopsis Node Closeness","Medicago Node Betweenness","Medicago Node Strength","Medicago Node Degree","Medicago Node Closeness")
-df <- cbind(df,cat)
-colnames(df) <- c("final_to_plot", "cat")
-
-
-df <-as.data.frame(df)
-df$final_to_plot <- as.numeric(df$final_to_plot)
-
-
-    ggplot(df, aes(cat, (final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="black", color="black", size=4, shape = 16) +
-    geom_linerange(aes(x = "Arabidopsis Tissue Specificity - Tau",ymin = a1, ymax = a2), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Betweenness",ymin = b1, ymax = b2), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Strength",ymin = c1, ymax = c2), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Degree",ymin = d1, ymax = d2), size = 1.5) +
-    geom_linerange(aes(x = "Arabidopsis Node Closeness",ymin = e1, ymax = e2), size = 1.5) +
-
-    geom_linerange(aes(x = "Medicago Node Betweenness",ymin = f1, ymax = f2), size = 1.5) +
-    geom_linerange(aes(x = "Medicago Node Strength",ymin = g1, ymax = g2), size = 1.5) +
-    geom_linerange(aes(x = "Medicago Node Degree",ymin = h1, ymax = h2), size = 1.5) +
-    geom_linerange(aes(x = "Medicago Node Closeness",ymin = i1, ymax = i2), size = 1.5) +
-    theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z1$z), x = "Arabidopsis Tissue Specificity - Tau"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z2$z), x = "Arabidopsis Node Betweenness"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z3$z), x = "Arabidopsis Node Strength"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z4$z), x = "Arabidopsis Node Degree"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z5$z), x = "Arabidopsis Node Closeness"),colour="red", shape = 17, size = 3) +
-
-    geom_point(aes(y=mean(my_hits_z6$z), x = "Medicago Node Betweenness"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z7$z), x = "Medicago Node Strength"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z8$z), x = "Medicago Node Degree"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z9$z), x = "Medicago Node Closeness"),colour="red", shape = 17, size = 3) +
-    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) +
-    ylab("Mean Orthogroup Z score") + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted") +
-    scale_y_continuous(breaks = c(-0.3,-0.2,-0.1,0.1,0.2,0.3), limit = c(-0.5,0.5)) +annotate("text",x="" ,y=0.44,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-0.45,label="Low Pleiotropy",fontface = "bold")
+par(mfrow=c(3,3))
+plot(-log(my_hits_z1$picmin_fdr),my_hits_z1$z, xlab = "-log PicMin FDR", ylab = "Tau Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z2$picmin_fdr),my_hits_z2$z, xlab = "-log PicMin FDR", ylab = "Athaliana betweenness Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z3$picmin_fdr),my_hits_z3$z, xlab = "-log PicMin FDR", ylab = "Athaliana strength Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z4$picmin_fdr),my_hits_z4$z, xlab = "-log PicMin FDR", ylab = "Athaliana degree Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z5$picmin_fdr),my_hits_z5$z, xlab = "-log PicMin FDR", ylab = "Athaliana closeness Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z6$picmin_fdr),my_hits_z6$z, xlab = "-log PicMin FDR", ylab = "Medicago betweenness Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z7$picmin_fdr),my_hits_z7$z, xlab = "-log PicMin FDR", ylab = "Medicago stength Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z8$picmin_fdr),my_hits_z8$z, xlab = "-log PicMin FDR", ylab = "Medicago degree Z")
+abline(h=0, col = "red")
+plot(-log(my_hits_z9$picmin_fdr),my_hits_z9$z, xlab = "-log PicMin FDR", ylab = "Medicago closeness Z")
+abline(h=0, col = "red")

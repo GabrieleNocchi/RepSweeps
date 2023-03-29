@@ -139,7 +139,35 @@ tmp_emp <- assign.pvalues(pvals)
 n$dunnsidak_orthopvalues <- tmp_emp
 write.table(n, file = "todesco_hargo_final_orthogroup.txt", quote = FALSE, row.names = FALSE,col.names=TRUE, sep = "\t")
 
-results <- rbind(a,b,c,d,e,f,g,h,i,j,k,l,m,n)
+
+o <- read.table("evans_ptricho_final_orthogroup.txt", h = T)
+species <- rep("ptricho", length(o$orthogroup))
+o <- cbind(o,species)
+pvals <- o$dunnsidak_orthopvalues
+tmp_emp <- assign.pvalues(pvals)
+o$dunnsidak_orthopvalues <- tmp_emp
+write.table(o, file = "evans_ptricho_final_orthogroup.txt", quote = FALSE, row.names = FALSE,col.names=TRUE, sep = "\t")
+
+
+p <- read.table("nocchi_bplaty_final_orthogroup.txt", h = T)
+species <- rep("bplaty", length(p$orthogroup))
+p <- cbind(p,species)
+pvals <- p$dunnsidak_orthopvalues
+tmp_emp <- assign.pvalues(pvals)
+p$dunnsidak_orthopvalues <- tmp_emp
+write.table(p, file = "nocchi_bplaty_final_orthogroup.txt", quote = FALSE, row.names = FALSE,col.names=TRUE, sep = "\t")
+
+
+q <- read.table("salojarvi_bpendula_final_orthogroup.txt", h = T)
+species <- rep("bpendula", length(q$orthogroup))
+q <- cbind(q,species)
+pvals <- q$dunnsidak_orthopvalues
+tmp_emp <- assign.pvalues(pvals)
+q$dunnsidak_orthopvalues <- tmp_emp
+write.table(q, file = "salojarvi_bpendula_final_orthogroup.txt", quote = FALSE, row.names = FALSE,col.names=TRUE, sep = "\t")
+
+
+results <- rbind(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q)
 climate <- rep("mean_temp", length(results$species))
 
 results <- cbind(results,climate)

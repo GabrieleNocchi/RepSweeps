@@ -34,7 +34,7 @@ p1 <- ggplot(my_data, aes(fill=FDR, y=count, x=picmin)) +
         axis.ticks.y=element_blank()) + ylab("OG count\n") +
         scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = -1, option  = "cividis") +
         coord_flip() +
-        scale_y_continuous(breaks=seq(0,280,20), position = "right") +
+        scale_y_continuous(breaks=seq(0,500,20), position = "right") +
         ggtitle(paste("PicMin OGs = ", format(round(as.numeric(length(data$p)), 1), big.mark=",")))
 
 
@@ -47,7 +47,7 @@ library(RColorBrewer)
 
 pic <- readRDS("gab_picmin_results.rds")
 pic <- pic$picmin_res
-pic <- pic[pic$picmin_fdr < 0.5,]
+pic <- pic[pic$picmin_fdr < 0.4,]
 results <- readRDS("orthogroup_results.rds")
 
 
@@ -56,7 +56,7 @@ data <- pic %>% left_join(results, by = c("Orthogroup"))
 
 
 p2<- ggplot(data, aes(x=reorder(species, ortho_DS, FUN = median), y=ortho_DS)) +
-    geom_boxplot() + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.5 (280 OGs)") + xlab("Species")
+    geom_boxplot() + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.4 (280 OGs)") + xlab("Species")
 
 library(dplyr)
 low_p_count <- data %>% group_by(species) %>% count(ortho_DS < 0.1)
@@ -93,7 +93,7 @@ p3 <- ggplot(final_data, aes(x = reorder(species, contribution),y = 1, fill = co
         axis.line.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
-        xlab("Species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
+        xlab("Species") + labs(fill='Species contribution') + ggtitle("Species contribution to PicMin OGs with FDR < 0.4 --> N(OG-p < 0.1)/N(OG-p)")
 
 
         p4 <- ggplot(data=final_data, aes(x=species, y=contribution*100)) +

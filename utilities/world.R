@@ -18,8 +18,8 @@ class(world)
 
 mycolors <- c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF", "#393B79", "#637939", "#8C6D31", "gold", "#4A7EBB", "#AEC7E8", "#FFBB78")
 ggplot(data = world) +
-        geom_sf(fill = "antiquewhite") + theme_classic() + geom_point(data = df2, aes(x = V7, y = V6, col = V1), size = 0.5,
-        shape = 19) + scale_color_manual(values = mycolors)+ guides(colour = guide_legend(override.aes = list(size=5))) +
+        geom_sf(fill = "antiquewhite") + theme_classic() + geom_point(data = df2, aes(x = V7, y = V6, col = V1), size = 1,shape = 19) +
+        scale_color_manual(values = mycolors)+ guides(colour = guide_legend(override.aes = list(size=5))) +
         theme(axis.title.y=element_blank(),
         axis.line.y=element_blank(),
         axis.text.y=element_blank(),

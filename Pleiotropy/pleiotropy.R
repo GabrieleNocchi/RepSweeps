@@ -1002,7 +1002,7 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
     ggplot(df, aes(cat, (final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="black", color="black", size=4, shape = 16) +
+    geom_point(color = "black", fill= "lightgoldenrod", shape = 19, size = 4) +
     geom_linerange(aes(x = "Arabidopsis Tissue Specificity - Tau",ymin = a1, ymax = a2), size = 1.5) +
     geom_linerange(aes(x = "Arabidopsis Node Betweenness",ymin = b1, ymax = b2), size = 1.5) +
     geom_linerange(aes(x = "Arabidopsis Node Strength",ymin = c1, ymax = c2), size = 1.5) +
@@ -1014,16 +1014,16 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
     geom_linerange(aes(x = "Medicago Node Degree",ymin = h1, ymax = h2), size = 1.5) +
     geom_linerange(aes(x = "Medicago Node Closeness",ymin = i1, ymax = i2), size = 1.5) +
     theme_classic() + coord_flip() +
-    geom_point(aes(y=mean(my_hits_z1$z), x = "Arabidopsis Tissue Specificity - Tau"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z2$z), x = "Arabidopsis Node Betweenness"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z3$z), x = "Arabidopsis Node Strength"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z4$z), x = "Arabidopsis Node Degree"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z5$z), x = "Arabidopsis Node Closeness"),colour="red", shape = 17, size = 3) +
+    geom_point(aes(y=mean(my_hits_z1$z), x = "Arabidopsis Tissue Specificity - Tau"),colour="black", fill = "red", shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z2$z), x = "Arabidopsis Node Betweenness"),colour="black", fill = "red",shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z3$z), x = "Arabidopsis Node Strength"),colour="black", fill = "red", shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z4$z), x = "Arabidopsis Node Degree"),colour="black", fill = "red",shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z5$z), x = "Arabidopsis Node Closeness"),colour="black", fill = "red",shape = 24, size = 3) +
 
-    geom_point(aes(y=mean(my_hits_z6$z), x = "Medicago Node Betweenness"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z7$z), x = "Medicago Node Strength"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z8$z), x = "Medicago Node Degree"),colour="red", shape = 17, size = 3) +
-    geom_point(aes(y=mean(my_hits_z9$z), x = "Medicago Node Closeness"),colour="red", shape = 17, size = 3) +
+    geom_point(aes(y=mean(my_hits_z6$z), x = "Medicago Node Betweenness"),colour="black", fill = "red",shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z7$z), x = "Medicago Node Strength"),colour="black", fill = "red",shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z8$z), x = "Medicago Node Degree"),colour="black", fill = "red", shape = 24, size = 3) +
+    geom_point(aes(y=mean(my_hits_z9$z), x = "Medicago Node Closeness"),colour="black", fill = "red", shape = 24, size = 3) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(),plot.title = element_text(hjust = 0.5, vjust = 3.5)) +
     ylab("Mean Orthogroup Z score") + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted") +
     scale_y_continuous(breaks = c(-0.3,-0.2,-0.1,0.1,0.2,0.3), limit = c(-0.5,0.5)) +annotate("text",x="" ,y=0.44,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-0.45,label="Low Pleiotropy",fontface = "bold") +  ggtitle("FDR < 0.4")

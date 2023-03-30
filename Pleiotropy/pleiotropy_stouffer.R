@@ -821,6 +821,6 @@ my_data_to_plot <- as.data.frame(my_data_to_plot)
 my_data_to_plot$stouf <- as.numeric(my_data_to_plot$stouf)
 
 ggplot(my_data_to_plot, aes(y=stouf, x=cat)) +
-    geom_bar(stat="identity", color = "black") + theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-    scale_y_continuous(breaks = c(-4,-3,-2,-1,1,2,3,4), limit = c(-5,5)) + ylab("Stouffer's Z") + theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-    annotate("text",x="" ,y=3.5,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-3.5,label="Low Pleiotropy",fontface = "bold")
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod") + theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-4,-3,-2,-1,1,2,3,4), limit = c(-5,5)) + ylab("Stouffer's Z") + theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), plot.title = element_text(hjust = 0.5, vjust = 3.5)) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=3.5,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-3.5,label="Low Pleiotropy",fontface = "bold") +  ggtitle("FDR < 0.4")

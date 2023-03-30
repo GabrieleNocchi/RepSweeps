@@ -1002,7 +1002,7 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
 
 
     ggplot(df, aes(cat, (final_to_plot))) +        # ggplot2 plot with confidence intervals
-    geom_point(fill="lightgoldenrod", color="black", size=4, shape = 16) +
+    geom_point(fill="black", color="black", size=4, shape = 16) +
     geom_linerange(aes(x = "Arabidopsis Tissue Specificity - Tau",ymin = a1, ymax = a2), size = 1.5) +
     geom_linerange(aes(x = "Arabidopsis Node Betweenness",ymin = b1, ymax = b2), size = 1.5) +
     geom_linerange(aes(x = "Arabidopsis Node Strength",ymin = c1, ymax = c2), size = 1.5) +

@@ -2,7 +2,7 @@
 # map is what I use to link TAIR_gene to Orthogroup_ID
 my_hits <- readRDS("gab_picmin_results.rds")
 my_hits <- my_hits$picmin_res
-my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
+# my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
@@ -803,23 +803,52 @@ my_hits_z <- my_hits %>%
 my_hits_z9 <-my_hits_z[complete.cases(my_hits_z), ]
 
 z9 <- sum(my_hits_z9$z)/(sqrt(length(my_hits_z9$z)))
+#
+# par(mfrow=c(3,3))
+# plot(-log(my_hits_z1$picmin_fdr),my_hits_z1$z, xlab = "-log PicMin FDR", ylab = "Tau Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z2$picmin_fdr),my_hits_z2$z, xlab = "-log PicMin FDR", ylab = "Athaliana betweenness Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z3$picmin_fdr),my_hits_z3$z, xlab = "-log PicMin FDR", ylab = "Athaliana strength Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z4$picmin_fdr),my_hits_z4$z, xlab = "-log PicMin FDR", ylab = "Athaliana degree Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z5$picmin_fdr),my_hits_z5$z, xlab = "-log PicMin FDR", ylab = "Athaliana closeness Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z6$picmin_fdr),my_hits_z6$z, xlab = "-log PicMin FDR", ylab = "Medicago betweenness Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z7$picmin_fdr),my_hits_z7$z, xlab = "-log PicMin FDR", ylab = "Medicago stength Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z8$picmin_fdr),my_hits_z8$z, xlab = "-log PicMin FDR", ylab = "Medicago degree Z")
+# abline(h=0, col = "red")
+# plot(-log(my_hits_z9$picmin_fdr),my_hits_z9$z, xlab = "-log PicMin FDR", ylab = "Medicago closeness Z")
+# abline(h=0, col = "red")
 
-par(mfrow=c(3,3))
-plot(-log(my_hits_z1$picmin_fdr),my_hits_z1$z, xlab = "-log PicMin FDR", ylab = "Tau Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z2$picmin_fdr),my_hits_z2$z, xlab = "-log PicMin FDR", ylab = "Athaliana betweenness Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z3$picmin_fdr),my_hits_z3$z, xlab = "-log PicMin FDR", ylab = "Athaliana strength Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z4$picmin_fdr),my_hits_z4$z, xlab = "-log PicMin FDR", ylab = "Athaliana degree Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z5$picmin_fdr),my_hits_z5$z, xlab = "-log PicMin FDR", ylab = "Athaliana closeness Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z6$picmin_fdr),my_hits_z6$z, xlab = "-log PicMin FDR", ylab = "Medicago betweenness Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z7$picmin_fdr),my_hits_z7$z, xlab = "-log PicMin FDR", ylab = "Medicago stength Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z8$picmin_fdr),my_hits_z8$z, xlab = "-log PicMin FDR", ylab = "Medicago degree Z")
-abline(h=0, col = "red")
-plot(-log(my_hits_z9$picmin_fdr),my_hits_z9$z, xlab = "-log PicMin FDR", ylab = "Medicago closeness Z")
-abline(h=0, col = "red")
+
+
+library(ggplot2)
+library(gridExtra)
+
+# Define function to create individual plots
+create_plot <- function(data, xlab, ylab) {
+  ggplot(data, aes(x = -log(picmin_fdr), y = z)) +
+    geom_point( color = "black", fill= "lightgoldenrod", shape = 21, size = 2) +
+    geom_hline(yintercept = 0, color = "red") +
+    xlab(xlab) +
+    ylab(ylab) +
+    theme_classic()
+}
+
+# Create individual plots
+plot1 <- create_plot(my_hits_z1, "-log PicMin FDR", "Tau Z")
+plot2 <- create_plot(my_hits_z2, "-log PicMin FDR", "Athaliana betweenness Z")
+plot3 <- create_plot(my_hits_z3, "-log PicMin FDR", "Athaliana strength Z")
+plot4 <- create_plot(my_hits_z4, "-log PicMin FDR", "Athaliana degree Z")
+plot5 <- create_plot(my_hits_z5, "-log PicMin FDR", "Athaliana closeness Z")
+plot6 <- create_plot(my_hits_z6, "-log PicMin FDR", "Medicago betweenness Z")
+plot7 <- create_plot(my_hits_z7, "-log PicMin FDR", "Medicago strength Z")
+plot8 <- create_plot(my_hits_z8, "-log PicMin FDR", "Medicago degree Z")
+plot9 <- create_plot(my_hits_z9, "-log PicMin FDR", "Medicago closeness Z")
+
+# Arrange plots in 3x3 grid using gridExtra
+grid.arrange(plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9, ncol = 3)

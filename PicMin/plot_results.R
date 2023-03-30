@@ -41,7 +41,7 @@ library(RColorBrewer)
 library(RColorBrewer)
 library(colorspace)
 
-pal <- c("#4E79A7", "#F28E2B", "#E15759", "#76B7B2", "#59A14F", "#EDC948", "#B07AA1", "#FF9DA7", "#9C755F", "#BAB0AC", "#FFD92F", "#949494", "#A9A9A9", "#000000", "#FFFFFF", "#C85200", "#0072B2", "#D55E00", "#CC79A7", "#56B4E9")
+pal <- c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF", "#393B79", "#637939", "#8C6D31", "gold", "#4A7EBB", "#AEC7E8", "#FFBB78")
 
 
 pic <- readRDS("gab_picmin_results.rds")

@@ -29,7 +29,7 @@ p1 <- ggplot(my_data, aes(fill=FDR, y=count, x=picmin)) +
         axis.line.y=element_blank(),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) + ylab("OG count\n") +
-        scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = -1, option  = "cividis") +
+        scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = 1, option  = "mako") +
         coord_flip() +
         scale_y_continuous(breaks=seq(0,500,20), position = "right") +
         ggtitle(paste("PicMin OGs = ", format(round(as.numeric(length(data$p)), 1), big.mark=",")))
@@ -92,7 +92,7 @@ final_data <- cbind(reformatted_data,contribution)
 
 
 p4 <- ggplot(data=final_data, aes(x=reorder(species,contribution), y=contribution*100)) +
-geom_bar(stat="identity", width = 0.6,fill = "gold", col = "black") + coord_flip() + theme_classic() + xlab("Species") + ylab("Contribution %") + labs(fill='Species') + theme(legend.position = "none") +
+geom_bar(stat="identity", width = 0.6,fill = "lightgoldenrod", col = "black") + coord_flip() + theme_classic() + xlab("Species") + ylab("Contribution %") + labs(fill='Species') + theme(legend.position = "none") +
 ggtitle("Species contribution to PicMin OGs with FDR < 0.4 --> N(OG-p < 0.1)/N(OG-p)")
 
 

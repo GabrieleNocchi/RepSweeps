@@ -831,7 +831,7 @@ library(gridExtra)
 
 # Define function to create individual plots
 create_plot <- function(data, xlab, ylab) {
-  ggplot(data, aes(x = -log(picmin_fdr), y = z)) +
+  ggplot(data, aes(x = -log10(picmin_fdr), y = z)) +
     geom_point( color = "black", fill= "lightgoldenrod", shape = 21, size = 2) +
     geom_hline(yintercept = 0, color = "red") +
     xlab(xlab) +

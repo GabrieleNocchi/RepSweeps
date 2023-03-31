@@ -909,7 +909,7 @@ p2 <- ggplot(z2, aes(y=z2, x=my_ranks)) +
       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana betweenness Stouffer's Z") +
-      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), axis.text.y=element_blank()) + theme(aspect.ratio = .4) +
+      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
@@ -935,7 +935,7 @@ p2 <- ggplot(z2, aes(y=z2, x=my_ranks)) +
        geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
        theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
        scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana strength Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), axis.text.y=element_blank()) + theme(aspect.ratio = .4) +
+       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
        annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
@@ -997,7 +997,7 @@ p5 <- ggplot(z5, aes(y=z5, x=my_ranks)) +
       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana closeness Stouffer's Z") +
-      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), axis.text.y=element_blank()) + theme(aspect.ratio = .4) +
+      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
@@ -1026,7 +1026,7 @@ p5 <- ggplot(z5, aes(y=z5, x=my_ranks)) +
        geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
        theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
        scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago betweenness Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), axis.text.y=element_blank()) + theme(aspect.ratio = .4) +
+       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
        annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
@@ -1080,7 +1080,7 @@ p8 <- ggplot(z8, aes(y=z8, x=my_ranks)) +
       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago degree Stouffer's Z") +
-      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), axis.text.y=element_blank()) + theme(aspect.ratio = .4) +
+      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
@@ -1107,7 +1107,7 @@ p8 <- ggplot(z8, aes(y=z8, x=my_ranks)) +
        geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
        theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
        scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago closeness Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(), axis.text.y=element_blank()) + theme(aspect.ratio = .4) +
+       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
        annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 

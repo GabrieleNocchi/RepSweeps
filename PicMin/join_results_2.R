@@ -221,5 +221,5 @@ results <- rbind(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q)
 climate <- rep("mean_temp", length(results$species))
 
 results <- cbind(results,climate)
-colnames(results) <- c("gene","min_CLR","scan_n","mean_emp_p","Orthogroup","ortho_size", "ortho_DS", "species", "climate")
+colnames(results) <- c("Orthogroup","gene","min_CLR","scan_n","mean_emp_p","ortho_size", "ortho_DS", "species", "climate")
 saveRDS(results, "orthogroup_results.rds")

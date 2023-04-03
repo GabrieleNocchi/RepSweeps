@@ -2,7 +2,7 @@
 # map is what I use to link TAIR_gene to Orthogroup_ID
 my_hits <- readRDS("gab_picmin_results.rds")
 my_hits <- my_hits$picmin_res
-my_hits <- my_hits[my_hits$picmin_fdr < 0.4,]
+my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
@@ -129,7 +129,7 @@ my_hits_z1 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -229,7 +229,7 @@ my_hits_z2 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -330,7 +330,7 @@ my_hits_z3 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -432,7 +432,7 @@ my_hits_z4 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -530,7 +530,7 @@ my_hits_z5 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -632,7 +632,7 @@ my_hits_z6 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -732,7 +732,7 @@ my_hits_z7 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -831,7 +831,7 @@ my_hits_z8 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 
@@ -929,7 +929,7 @@ my_hits_z9 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 30))
+my_list <- replicate(10000,sample_n(final, 35))
 
 final_to_plot <- c()
 

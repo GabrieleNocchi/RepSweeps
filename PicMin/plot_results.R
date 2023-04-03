@@ -46,7 +46,7 @@ pal <- c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E37
 
 pic <- readRDS("gab_picmin_results.rds")
 pic <- pic$picmin_res
-pic <- pic[pic$picmin_fdr < 0.4,]
+pic <- pic[pic$picmin_fdr < 0.5,]
 results <- readRDS("orthogroup_results.rds")
 
 
@@ -55,7 +55,7 @@ data <- pic %>% left_join(results, by = c("Orthogroup"))
 
 
 p2<- ggplot(data, aes(x=reorder(species, ortho_DS, FUN = median), y=ortho_DS, fill = species)) +
-     geom_boxplot() + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.4 (280 OGs)") + xlab("Species") +
+     geom_boxplot() + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.5 (280 OGs)") + xlab("Species") +
      scale_fill_manual(values=pal)
 
 
@@ -93,7 +93,7 @@ final_data <- cbind(reformatted_data,contribution)
 
 p4 <- ggplot(data=final_data, aes(x=reorder(species,contribution), y=contribution*100)) +
 geom_bar(stat="identity", width = 0.6,fill = "lightgoldenrod", col = "black") + coord_flip() + theme_classic() + xlab("Species") + ylab("Contribution %") + labs(fill='Species') + theme(legend.position = "none") +
-ggtitle("Species contribution to PicMin OGs with FDR < 0.4 --> N(OG-p < 0.1)/N(OG-p)")
+ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
 
 
 library(gridExtra)

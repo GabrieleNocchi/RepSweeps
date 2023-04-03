@@ -1,4 +1,4 @@
-setwd("/Users/gnocc/Desktop/RepSweeps/PicMin_new/all_uniform/")
+
 ### CONTINUOUS HEATMAP
 # library(ggplot2)
 # library(reshape2)
@@ -157,7 +157,7 @@ library(dplyr)
 
 z <- readRDS("gab_picmin_results.rds")
 z <- z$picmin_res
-z <- z[z$picmin_fdr<0.4,]
+z <- z[z$picmin_fdr<0.5,]
 z <- as.data.frame(cbind(z$Orthogroup, z$climate_var))
 colnames(z) <- c("Orthogroup", "removeme")
 
@@ -165,7 +165,7 @@ colnames(z) <- c("Orthogroup", "removeme")
 df <- readRDS("orthogroup_results.rds")
 df <- df %>%   left_join(z, by = c("Orthogroup"))
 df <- df[complete.cases(df),]
-df <- df[, -c(1, 2, 3, 4, 6, 9,10)]
+df <- df[, -c(2, 3, 4,5, 6, 9,10)]
 
 
 

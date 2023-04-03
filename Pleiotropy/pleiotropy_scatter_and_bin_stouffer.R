@@ -803,28 +803,15 @@ my_hits_z <- my_hits %>%
 my_hits_z9 <-my_hits_z[complete.cases(my_hits_z), ]
 
 z9 <- sum(my_hits_z9$z)/(sqrt(length(my_hits_z9$z)))
-#
-# par(mfrow=c(3,3))
-# plot(-log(my_hits_z1$picmin_fdr),my_hits_z1$z, xlab = "-log PicMin FDR", ylab = "Tau Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z2$picmin_fdr),my_hits_z2$z, xlab = "-log PicMin FDR", ylab = "Athaliana betweenness Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z3$picmin_fdr),my_hits_z3$z, xlab = "-log PicMin FDR", ylab = "Athaliana strength Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z4$picmin_fdr),my_hits_z4$z, xlab = "-log PicMin FDR", ylab = "Athaliana degree Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z5$picmin_fdr),my_hits_z5$z, xlab = "-log PicMin FDR", ylab = "Athaliana closeness Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z6$picmin_fdr),my_hits_z6$z, xlab = "-log PicMin FDR", ylab = "Medicago betweenness Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z7$picmin_fdr),my_hits_z7$z, xlab = "-log PicMin FDR", ylab = "Medicago stength Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z8$picmin_fdr),my_hits_z8$z, xlab = "-log PicMin FDR", ylab = "Medicago degree Z")
-# abline(h=0, col = "red")
-# plot(-log(my_hits_z9$picmin_fdr),my_hits_z9$z, xlab = "-log PicMin FDR", ylab = "Medicago closeness Z")
-# abline(h=0, col = "red")
 
 
+
+
+
+
+
+###################################
+### Plot Scatters
 
 library(ggplot2)
 library(gridExtra)
@@ -857,25 +844,23 @@ grid.arrange(plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9, ncol
 
 
 
-
+###Deciles
 # Stouffer by bin
+library(dplyr)
 
 
-# create bins of 0.1 interval between 0 and 1 inclusive
-bins <- seq(0.1, 1, by = 0.1)
+# add p_decile column with decile rank for column "p"
+my_hits_z1 <- my_hits_z1 %>%
+  mutate(rank = ntile(p, 10))
 
-# add a new column called 'rank' to the dataframe
-my_hits_z1$rank <- cut(my_hits_z1$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
-
-# print the first 10 rows of the updated dataframe to check the results
-head(my_hits_z1, 10)
 
 z1 <- tapply(my_hits_z1$z, my_hits_z1$rank, sum) / sqrt(tapply(my_hits_z1$z, my_hits_z1$rank, length))
 z1 <- as.data.frame(z1)
-my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
-z1 <- cbind(z1,my_ranks)
 z1 <- head(z1,7)
-z1$my_ranks <- factor(z1$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z1 <- cbind(z1,my_ranks)
+z1$my_ranks <- factor(z1$my_ranks, levels = my_ranks)
+
 
 p1 <- ggplot(z1, aes(y=z1, x=my_ranks)) +
     geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
@@ -888,227 +873,221 @@ p1 <- ggplot(z1, aes(y=z1, x=my_ranks)) +
 
 
 
+####Proper deciles rather than bins
+# Stouffer by bin
+library(dplyr)
 
-# create bins of 0.1 interval between 0 and 1 inclusive
-bins <- seq(0.1, 1, by = 0.1)
 
-# add a new column called 'rank' to the dataframe
-my_hits_z2$rank <- cut(my_hits_z2$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
+# add p_decile column with decile rank for column "p"
+my_hits_z2 <- my_hits_z2 %>%
+  mutate(rank = ntile(p, 10))
 
- # print the first 10 rows of the updated dataframe to check the results
-head(my_hits_z2, 10)
 
 z2 <- tapply(my_hits_z2$z, my_hits_z2$rank, sum) / sqrt(tapply(my_hits_z2$z, my_hits_z2$rank, length))
 z2 <- as.data.frame(z2)
-my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
-z2 <- cbind(z2,my_ranks)
 z2 <- head(z2,7)
-z2$my_ranks <- factor(z2$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z2 <- cbind(z2,my_ranks)
+z2$my_ranks <- factor(z2$my_ranks, levels = my_ranks)
 
 p2 <- ggplot(z2, aes(y=z2, x=my_ranks)) +
-      geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-      theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-      scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana betweenness Stouffer's Z") +
-      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-      annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
-
-
-
-
- # create bins of 0.1 interval between 0 and 1 inclusive
- bins <- seq(0.1, 1, by = 0.1)
-
- # add a new column called 'rank' to the dataframe
- my_hits_z3$rank <- cut(my_hits_z3$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
-
- # print the first 10 rows of the updated dataframe to check the results
- head(my_hits_z3, 10)
-
- z3 <- tapply(my_hits_z3$z, my_hits_z3$rank, sum) / sqrt(tapply(my_hits_z3$z, my_hits_z3$rank, length))
- z3 <- as.data.frame(z3)
- my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
- z3 <- cbind(z3,my_ranks)
- z3 <- head(z3,7)
- z3$my_ranks <- factor(z3$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
-
- p3 <- ggplot(z3, aes(y=z3, x=my_ranks)) +
-       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana strength Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana betweenness Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
 
 
 
+# Stouffer by bin
+library(dplyr)
+
+
+# add p_decile column with decile rank for column "p"
+my_hits_z3 <- my_hits_z3 %>%
+  mutate(rank = ntile(p, 10))
+
+
+z3 <- tapply(my_hits_z3$z, my_hits_z3$rank, sum) / sqrt(tapply(my_hits_z3$z, my_hits_z3$rank, length))
+z3 <- as.data.frame(z3)
+z3 <- head(z3,7)
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z3 <- cbind(z3,my_ranks)
+z3$my_ranks <- factor(z3$my_ranks, levels = my_ranks)
+
+p3 <- ggplot(z3, aes(y=z3, x=my_ranks)) +
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana strength Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
 
 
 
+# Stouffer by bin
+library(dplyr)
 
- # create bins of 0.1 interval between 0 and 1 inclusive
- bins <- seq(0.1, 1, by = 0.1)
 
- # add a new column called 'rank' to the dataframe
- my_hits_z4$rank <- cut(my_hits_z4$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
+# add p_decile column with decile rank for column "p"
+my_hits_z4 <- my_hits_z4 %>%
+  mutate(rank = ntile(p, 10))
 
- # print the first 10 rows of the updated dataframe to check the results
- head(my_hits_z4, 10)
 
- z4 <- tapply(my_hits_z4$z, my_hits_z4$rank, sum) / sqrt(tapply(my_hits_z4$z, my_hits_z4$rank, length))
- z4 <- as.data.frame(z4)
- my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
- z4 <- cbind(z4,my_ranks)
- z4 <- head(z4,7)
- z4$my_ranks <- factor(z4$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
+z4 <- tapply(my_hits_z4$z, my_hits_z4$rank, sum) / sqrt(tapply(my_hits_z4$z, my_hits_z4$rank, length))
+z4 <- as.data.frame(z4)
+z4 <- head(z4,7)
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z4 <- cbind(z4,my_ranks)
+z4$my_ranks <- factor(z4$my_ranks, levels = my_ranks)
 
- p4 <- ggplot(z4, aes(y=z4, x=my_ranks)) +
-       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana degree Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
-
+p4 <- ggplot(z4, aes(y=z4, x=my_ranks)) +
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana degree Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
 
 
 
+# Stouffer by bin
+library(dplyr)
 
-# create bins of 0.1 interval between 0 and 1 inclusive
-bins <- seq(0.1, 1, by = 0.1)
 
-# add a new column called 'rank' to the dataframe
-my_hits_z5$rank <- cut(my_hits_z5$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
+# add p_decile column with decile rank for column "p"
+my_hits_z5 <- my_hits_z5 %>%
+  mutate(rank = ntile(p, 10))
 
-# print the first 10 rows of the updated dataframe to check the results
-head(my_hits_z5, 10)
 
 z5 <- tapply(my_hits_z5$z, my_hits_z5$rank, sum) / sqrt(tapply(my_hits_z5$z, my_hits_z5$rank, length))
 z5 <- as.data.frame(z5)
-my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
-z5 <- cbind(z5,my_ranks)
 z5 <- head(z5,7)
-z5$my_ranks <- factor(z5$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z5 <- cbind(z5,my_ranks)
+z5$my_ranks <- factor(z5$my_ranks, levels = my_ranks)
 
 p5 <- ggplot(z5, aes(y=z5, x=my_ranks)) +
-      geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-      theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-      scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana closeness Stouffer's Z") +
-      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-      annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Athaliana closeness Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
 
 
 
+# Stouffer by bin
+library(dplyr)
 
 
- # create bins of 0.1 interval between 0 and 1 inclusive
- bins <- seq(0.1, 1, by = 0.1)
-
- # add a new column called 'rank' to the dataframe
- my_hits_z6$rank <- cut(my_hits_z6$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
-
- # print the first 10 rows of the updated dataframe to check the results
- head(my_hits_z6, 10)
-
- z6 <- tapply(my_hits_z6$z, my_hits_z6$rank, sum) / sqrt(tapply(my_hits_z6$z, my_hits_z6$rank, length))
- z6 <- as.data.frame(z6)
- my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
- z6 <- cbind(z6,my_ranks)
- z6 <- head(z6,7)
- z6$my_ranks <- factor(z6$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
-
- p6 <- ggplot(z6, aes(y=z6, x=my_ranks)) +
-       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago betweenness Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+# add p_decile column with decile rank for column "p"
+my_hits_z6 <- my_hits_z6 %>%
+  mutate(rank = ntile(p, 10))
 
 
+z6 <- tapply(my_hits_z6$z, my_hits_z6$rank, sum) / sqrt(tapply(my_hits_z6$z, my_hits_z6$rank, length))
+z6 <- as.data.frame(z6)
+z6 <- head(z6,7)
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z6 <- cbind(z6,my_ranks)
+z6$my_ranks <- factor(z6$my_ranks, levels = my_ranks)
 
-
-
- # create bins of 0.1 interval between 0 and 1 inclusive
- bins <- seq(0.1, 1, by = 0.1)
-
- # add a new column called 'rank' to the dataframe
- my_hits_z7$rank <- cut(my_hits_z7$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
-
- # print the first 10 rows of the updated dataframe to check the results
- head(my_hits_z7, 10)
-
- z7 <- tapply(my_hits_z7$z, my_hits_z7$rank, sum) / sqrt(tapply(my_hits_z7$z, my_hits_z7$rank, length))
- z7 <- as.data.frame(z7)
- my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
- z7 <- cbind(z7,my_ranks)
- z7 <- head(z7,7)
- z7$my_ranks <- factor(z7$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
-
- p7 <- ggplot(z7, aes(y=z7, x=my_ranks)) +
-       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago strength Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+p6 <- ggplot(z6, aes(y=z6, x=my_ranks)) +
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago betweenness Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
 
 
 
-# create bins of 0.1 interval between 0 and 1 inclusive
-bins <- seq(0.1, 1, by = 0.1)
+# Stouffer by bin
+library(dplyr)
 
-# add a new column called 'rank' to the dataframe
-my_hits_z8$rank <- cut(my_hits_z8$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
 
-# print the first 10 rows of the updated dataframe to check the results
-head(my_hits_z8, 10)
+# add p_decile column with decile rank for column "p"
+my_hits_z7 <- my_hits_z7 %>%
+  mutate(rank = ntile(p, 10))
+
+
+z7 <- tapply(my_hits_z7$z, my_hits_z7$rank, sum) / sqrt(tapply(my_hits_z7$z, my_hits_z7$rank, length))
+z7 <- as.data.frame(z7)
+z7 <- head(z7,7)
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z7 <- cbind(z7,my_ranks)
+z7$my_ranks <- factor(z7$my_ranks, levels = my_ranks)
+
+p7 <- ggplot(z7, aes(y=z7, x=my_ranks)) +
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago strength Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+
+
+
+
+
+# Stouffer by bin
+library(dplyr)
+
+
+# add p_decile column with decile rank for column "p"
+my_hits_z8 <- my_hits_z8 %>%
+  mutate(rank = ntile(p, 10))
+
 
 z8 <- tapply(my_hits_z8$z, my_hits_z8$rank, sum) / sqrt(tapply(my_hits_z8$z, my_hits_z8$rank, length))
 z8 <- as.data.frame(z8)
-my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
-z8 <- cbind(z8,my_ranks)
 z8 <- head(z8,7)
-z8$my_ranks <- factor(z8$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z8 <- cbind(z8,my_ranks)
+z8$my_ranks <- factor(z8$my_ranks, levels = my_ranks)
 
 p8 <- ggplot(z8, aes(y=z8, x=my_ranks)) +
-      geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-      theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-      scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago degree Stouffer's Z") +
-      theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-      annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago degree Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
 
 
 
 
 
- # create bins of 0.1 interval between 0 and 1 inclusive
- bins <- seq(0.1, 1, by = 0.1)
+# Stouffer by bin
+library(dplyr)
 
- # add a new column called 'rank' to the dataframe
- my_hits_z9$rank <- cut(my_hits_z9$picmin_fdr, bins, labels = FALSE, include.lowest = TRUE)
 
-# print the first 10 rows of the updated dataframe to check the results
- head(my_hits_z9, 10)
+# add p_decile column with decile rank for column "p"
+my_hits_z9 <- my_hits_z9 %>%
+  mutate(rank = ntile(p, 10))
 
- z9 <- tapply(my_hits_z9$z, my_hits_z9$rank, sum) / sqrt(tapply(my_hits_z9$z, my_hits_z9$rank, length))
- z9 <- as.data.frame(z9)
- my_ranks <- c("[0.0000299-0.00015]","[0.00015-0.00059]","[0.00059-0.00103]","[0.00103-0.01608]","[0.01608-0.06337]","[0.06337-0.26173]","[0.26173-0.46953]","8","9")
- z9 <- cbind(z9,my_ranks)
- z9 <- head(z9,7)
- z9$my_ranks <- factor(z9$my_ranks, levels = c("[0.0000299-0.00015]", "[0.00015-0.00059]", "[0.00059-0.00103]", "[0.00103-0.01608]", "[0.01608-0.06337]", "[0.06337-0.26173]", "[0.26173-0.46953]", "8", "9"))
 
- p9 <- ggplot(z9, aes(y=z9, x=my_ranks)) +
-       geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
-       theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-       scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago closeness Stouffer's Z") +
-       theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
-       annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+z9 <- tapply(my_hits_z9$z, my_hits_z9$rank, sum) / sqrt(tapply(my_hits_z9$z, my_hits_z9$rank, length))
+z9 <- as.data.frame(z9)
+z9 <- head(z9,7)
+my_ranks <- c("First","Second","Third","Fourth","Fifth","Sixth","Seventh")
+z9 <- cbind(z9,my_ranks)
+z9$my_ranks <- factor(z9$my_ranks, levels = my_ranks)
+
+p9 <- ggplot(z9, aes(y=z9, x=my_ranks)) +
+    geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
+    theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago clsoeness Stouffer's Z") +
+    theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4) +
+    annotate("text",x="" ,y=5.5,label="High Pleiotropy",fontface = "bold", size = 3) + annotate("text",x="",y=-5.5,label="Low Pleiotropy",fontface = "bold",size = 3)
+
+
+
 
 
 library(gridExtra)

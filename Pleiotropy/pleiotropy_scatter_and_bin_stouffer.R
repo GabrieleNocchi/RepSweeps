@@ -1067,7 +1067,7 @@ z9$my_ranks <- factor(z9$my_ranks, levels = my_ranks)
 p9 <- ggplot(z9, aes(y=z9, x=my_ranks)) +
     geom_bar(stat="identity", color = "black", fill = "lightgoldenrod")+
     theme_classic() + coord_flip() + geom_hline(yintercept=1.95, linetype="dashed") + geom_hline(yintercept=-1.95, linetype="dashed") +
-    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago clsoeness Stouffer's Z") +
+    scale_y_continuous(breaks = c(-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8), limit = c(-8,8)) + ylab("Medicago closeness Stouffer's Z") +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank()) + theme(aspect.ratio = .4)
 
 

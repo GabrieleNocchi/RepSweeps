@@ -1026,4 +1026,4 @@ df$final_to_plot <- as.numeric(df$final_to_plot)
     geom_point(aes(y=mean(my_hits_z9$z), x = "Medicago Node Closeness"),colour="black", fill = "red", shape = 24, size = 3) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(),plot.title = element_text(hjust = 0.5, vjust = 1.5)) +
     ylab("Mean Orthogroup Z score") + geom_hline(yintercept=0, linetype="dashed") + geom_hline(yintercept=c(-0.3,-0.25,-0.2,-0.15,-0.1,-0.05,0.05,0.1,0.15,0.2,0.25,0.3), linetype="dotted") +
-    scale_y_continuous(breaks = c(-0.3,-0.2,-0.1,0.1,0.2,0.3), limit = c(-0.5,0.5)) +annotate("text",x="" ,y=0.44,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-0.45,label="Low Pleiotropy",fontface = "bold") +  ggtitle("FDR < 0.4")
+    scale_y_continuous(breaks = c(-0.6,-0.5,-0.4,-0.3,-0.2,-0.1,0.1,0.2,0.3,0.4,0.5,0.6), limit = c(-0.6,0.6)) + annotate("text",x="" ,y=0.55,label="High Pleiotropy",fontface = "bold") + annotate("text",x="",y=-0.55,label="Low Pleiotropy",fontface = "bold") +  ggtitle("FDR < 0.5")

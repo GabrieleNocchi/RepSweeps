@@ -27,8 +27,8 @@ total <- table(my_data_2$total_count)
 total <- as.data.frame(total)
 
 p2 <- ggplot(data=total, aes(x=Var1, y=Freq, fill = Var1)) +
-      geom_bar(stat="identity") + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "mako") + xlab("Number of Orthologues") + ylab("Number") + ggtitle("Total Number of OGs by orthologues Number\nPicMin used only OGs with at least 7 Orthologues")+
-      labs(fill='Orthologues N') +
+      geom_bar(stat="identity") + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "mako") + xlab("Number of Species") + ylab("Number") + ggtitle("OGs tested in PicMin by species number\nPicMin tested only OGs found in at least 7 species")+
+      labs(fill='Species N') +
       theme(legend.key.size = unit(0.2, 'cm'),plot.title = element_text(size = 10, face = "bold"))
 
 ortho_species <- results %>% left_join(my_data_2, by = c("Orthogroup"))

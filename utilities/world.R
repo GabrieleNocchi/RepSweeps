@@ -1,4 +1,4 @@
-setwd("/Users/gnocc/Desktop/RepSweeps/world_map/data")
+setwd("/Users/gnocc/Desktop/RepSweeps/RepSweeps_17_Gab/world_map/data")
 library("rnaturalearth")
 library("rnaturalearthdata")
 library(RColorBrewer)
@@ -11,7 +11,7 @@ class(world)
 
 
 
-    list_csv_files <- list.files(path = "/Users/gnocc/Desktop/RepSweeps/world_map/data")
+    list_csv_files <- list.files(path = "/Users/gnocc/Desktop/RepSweeps/RepSweeps_17_Gab/world_map/data")
     df2 = do.call(rbind, lapply(list_csv_files, function(x) fread(x, stringsAsFactors = FALSE, h = F, sep = ",",select=c(1,2,3,4,5,6,7))))
     df2
 

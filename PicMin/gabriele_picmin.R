@@ -1,5 +1,4 @@
 
-setwd("/Users/gnocc/Desktop/PicMin/")
 lib <- c("cowplot","poolr","mvmeta","qvalue","tidyr","ape","VGAM","ggExtra","pbmcapply","parallel","wCorr","data.table","ggplot2","viridis","ggridges","dplyr","readr")
 sapply(lib,library,character.only=T)
 

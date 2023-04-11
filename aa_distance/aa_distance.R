@@ -9,5 +9,5 @@ for (i in 1:length(a)) {
     selection <- my_results[my_results$Orthogroup == a[i],]
     genes <- selection$gene
     genes <- unique(sort(genes))
-    write.table(genes,file = a[i], quote = FALSE, row.names = F, col.names = F)
+    write.table(genes,file = paste0(a[i], ".txt"), quote = FALSE, row.names = F, col.names = F)
 }

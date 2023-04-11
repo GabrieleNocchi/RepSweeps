@@ -1,4 +1,4 @@
-for file in ./OG*
+for file in ./OG*txt
 do
 	sed 's/:/___/g' $file > tmp.txt
 

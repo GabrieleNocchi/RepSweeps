@@ -1,14 +1,15 @@
-for file in ./OG*txt
+for file in ./*.txt
 do
-	sed 's/:/___/g' $file > tmp.txt
+	sed 's/:/___/g' $file > tmp
 
 	while read line
 		do
-    		grep -A 1 -h $line *faa >> $file\_extracted_genes
+    		
+	grep -A 1 -h $line *faa >> $file\_extracted
     		# add commands to process the line here
-	done < tmp.txt
+	done < tmp
 	
 done
 
 
-rm tmp.txt
+rm tmp

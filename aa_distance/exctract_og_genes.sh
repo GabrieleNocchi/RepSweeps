@@ -4,7 +4,7 @@ do
 
 	while read line
 		do
-    		grep -A 1 -h $line *faa >> $file\_extracted_genes.txt
+    		grep -A 1 -h $line *faa >> $file\_extracted_genes
     		# add commands to process the line here
 	done < tmp.txt
 	

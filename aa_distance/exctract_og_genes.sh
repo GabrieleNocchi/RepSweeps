@@ -5,7 +5,7 @@ do
 	while read line
 		do
     		
-	grep -A 1 -h $line *faa >> $file\_extracted
+	grep -A 1 -h $line *faa >> $file\_extracted.fasta
     		# add commands to process the line here
 	done < tmp
 	

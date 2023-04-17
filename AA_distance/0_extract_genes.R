@@ -1,6 +1,6 @@
 a <- readRDS("gab_picmin_results.rds")
 a <- a$picmin_res
-a <- a[a$picmin_fdr < 0.5,]
+#a <- a[a$picmin_fdr < 0.5,]
 a <- a[,1]
 
 my_results <- readRDS("orthogroup_results.rds")

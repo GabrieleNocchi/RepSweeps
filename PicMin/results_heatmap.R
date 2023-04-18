@@ -63,10 +63,10 @@ my_picmin <- my_picmin$picmin_res
 my_picmin <- my_picmin[, -c(2, 3, 5, 6)]
 FDR <- my_fdr %>%   left_join(my_picmin, by = c("Orthogroup"))
 column_ha = HeatmapAnnotation(`PicMin FDR` = anno_barplot(FDR$picmin_fdr, border = FALSE), annotation_name_side = "right", annotation_name_gp= gpar(fontsize = 9))
-ht <- Heatmap(matrix_df, row_names_gp = gpar(fontsize = 8, fontface = "bold"), column_names_gp = gpar(fontsize = 10),col = Colors, na_col = "white", cluster_rows = F, top_annotation = column_ha, show_column_dend = FALSE, heatmap_legend_param = list(title = "Empirical p"))
+ht <- Heatmap(matrix_df, row_names_gp = gpar(fontsize = 8, fontface = "bold"), column_names_gp = gpar(fontsize = 10),col = Colors, na_col = "white", clustering_method_columns = "complete", cluster_rows = F, top_annotation = column_ha, show_column_dend = FALSE, heatmap_legend_param = list(title = "Empirical p"))
 draw(ht, padding = unit(c(20, 20, 20, 20), "mm"))
 
 
 #col_fun <- colorRamp2(c(0, 0.1, 1), c("#9E0142","grey","grey"))
-ht <- Heatmap(matrix_df,row_names_gp = gpar(fontsize = 8, fontface = "bold"), column_names_gp = gpar(fontsize = 10), col = c("#9E0142", "grey", "grey","grey","grey","grey" ,"grey", "grey","grey","grey"), na_col = "white", cluster_rows = F, top_annotation = column_ha, show_column_dend = FALSE, heatmap_legend_param = list(title = "Empirical p"))
+ht <- Heatmap(matrix_df,row_names_gp = gpar(fontsize = 8, fontface = "bold"), column_names_gp = gpar(fontsize = 10), clustering_method_columns = "complete", col = c("#9E0142", "grey", "grey","grey","grey","grey" ,"grey", "grey","grey","grey"), na_col = "white", cluster_rows = F, top_annotation = column_ha, show_column_dend = FALSE, heatmap_legend_param = list(title = "Empirical p"))
 draw(ht, padding = unit(c(20, 20, 20, 20), "mm" ))

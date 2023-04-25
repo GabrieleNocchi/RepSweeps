@@ -129,7 +129,7 @@ my_hits_z1 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z1$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -229,7 +229,7 @@ my_hits_z2 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z2$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -330,7 +330,7 @@ my_hits_z3 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z3$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -432,7 +432,7 @@ my_hits_z4 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z4$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -530,7 +530,7 @@ my_hits_z5 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z5$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -632,7 +632,7 @@ my_hits_z6 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z6$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -732,7 +732,7 @@ my_hits_z7 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z7$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -831,7 +831,7 @@ my_hits_z8 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z8$Orthogroup)))
 
 final_to_plot <- c()
 
@@ -929,7 +929,7 @@ my_hits_z9 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(final, 35))
+my_list <- replicate(10000,sample_n(final, length(my_hits_z9$Orthogroup)))
 
 final_to_plot <- c()
 

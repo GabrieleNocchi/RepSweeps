@@ -1,4 +1,5 @@
 library(ggplot2)
+library(viridis)
 data <-readRDS("gab_picmin_results.rds")
 data <- data$picmin_res
 

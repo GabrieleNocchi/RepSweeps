@@ -16,7 +16,7 @@ my_hits_dist <- my_hits %>%
 my_hits_dist <-my_hits_dist[complete.cases(my_hits_dist), ]
 
 
-my_list <- replicate(10000,sample_n(aa_dist, 44))
+my_list <- replicate(10000,sample_n(aa_dist, length(my_hits_dist$Orthogroup)))
 
 final_to_plot <- c()
 

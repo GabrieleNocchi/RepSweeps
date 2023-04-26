@@ -8,7 +8,7 @@ my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
 
 
-aa_dist <- read.table("formatted_output.txt", h = F)
+aa_dist <- read.table("formatted_distances.txt", h = F)
 colnames(aa_dist) <- c("Orthogroup", "distance")
 
 my_hits_dist <- my_hits %>%

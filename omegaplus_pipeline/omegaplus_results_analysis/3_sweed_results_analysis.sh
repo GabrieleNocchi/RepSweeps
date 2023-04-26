@@ -33,9 +33,6 @@ rm formatted*
 
 ### Restrict analysis to genes only
 
-/data/programs/bedtools2/bin/bedtools intersect -a all.bed -b noid_genes.gff -wa | uniq > tmp
-mv tmp all.bed
-
 
 ### Here I make a list of genes intersecting the clr scans. Each gene gets reported as many times as the number of clr scan it includes
 

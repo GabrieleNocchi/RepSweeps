@@ -1,0 +1,1 @@
+awk '{OFS="\t"}NR >1 {print $3,"mock","mock",$4,$5,".",".",".","id=gene"}' *_proteome_to_OF_id_map.txt | sort| uniq|awk  'BEGIN{print "seqname\tmock\tmock\tstart\tend\t.\tstrand\t.\tid=gene"}{print $0}' > genes.gff

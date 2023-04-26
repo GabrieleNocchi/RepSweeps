@@ -27,7 +27,7 @@ my_hits_z1 <-my_hits_z[complete.cases(my_hits_z), ]
 
 ### DRAWS
 
-my_list <- replicate(10000,sample_n(all, 45))
+my_list <- replicate(10000,sample_n(all, length(my_hits_z1$Orthogroup)))
 
 final_to_plot <- c()
 

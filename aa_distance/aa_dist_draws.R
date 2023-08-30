@@ -1,7 +1,11 @@
 library(dplyr)
 
 my_hits <- readRDS("gab_picmin_results.rds")
+
 my_hits <- my_hits$picmin_res
+to_crop <- my_hits$Orthogroup
+to_crop <- as.data.frame(to_crop)
+colnames(to_crop) <- "Orthogroup"
 my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
@@ -15,6 +19,10 @@ my_hits_dist <- my_hits %>%
   left_join(aa_dist, by = c("Orthogroup"))
 my_hits_dist <-my_hits_dist[complete.cases(my_hits_dist), ]
 
+
+aa_dist <- aa_dist %>%
+  left_join(to_crop, by = c("Orthogroup"))
+aa_dist <-aa_dist[complete.cases(aa_dist), ]
 
 my_list <- replicate(10000,sample_n(aa_dist, length(my_hits_dist$Orthogroup)))
 

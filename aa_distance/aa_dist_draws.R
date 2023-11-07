@@ -6,7 +6,7 @@ my_hits <- my_hits$picmin_res
 to_crop <- my_hits$Orthogroup
 to_crop <- as.data.frame(to_crop)
 colnames(to_crop) <- "Orthogroup"
-my_hits <- my_hits[my_hits$picmin_fdr < 0.5,]
+my_hits <- my_hits[my_hits$picmin_fdr < 0.2,]
 my_hits <- my_hits$Orthogroup
 my_hits <- as.data.frame(my_hits)
 colnames(my_hits) <- "Orthogroup"
@@ -24,6 +24,10 @@ aa_dist <- aa_dist %>%
   left_join(to_crop, by = c("Orthogroup"))
 aa_dist <-aa_dist[complete.cases(aa_dist), ]
 
+
+
+
+# Draws
 my_list <- replicate(10000,sample_n(aa_dist, length(my_hits_dist$Orthogroup)))
 
 final_to_plot <- c()
@@ -65,4 +69,4 @@ ggplot(df, aes(cat, (final_to_plot))) +        # ggplot2 plot with confidence in
 	 theme_classic() + coord_flip() +
     geom_point(aes(y=mean(my_hits_dist$distance), x = "All Distances"),colour="black", fill = "red", shape = 24, size = 3) +
     theme(axis.title.y=element_blank(),axis.line.y=element_blank(),axis.ticks.y=element_blank(),plot.title = element_text(hjust = 0.5, vjust = 1.5)) +
-    ylab("Mean Orthogroup Amino Acid Distances") +  ggtitle("FDR < 0.5")
+    ylab("Mean Orthogroup Amino Acid Distances") +  ggtitle("FDR < 0.2")

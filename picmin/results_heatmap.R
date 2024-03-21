@@ -6,7 +6,7 @@ library(viridis)
 
 z <- readRDS("gab_picmin_results.rds")
 z <- z$picmin_res
-z <- z[z$picmin_fdr<0.2,]
+z <- z[z$picmin_fdr<0.1,]
 z <- as.data.frame(cbind(z$Orthogroup, z$climate_var))
 colnames(z) <- c("Orthogroup", "removeme")
 

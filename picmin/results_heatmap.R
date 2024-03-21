@@ -2,10 +2,11 @@ library(ggplot2)
 library(reshape2)
 library(dplyr)
 library(circlize)
+library(viridis)
 
 z <- readRDS("gab_picmin_results.rds")
 z <- z$picmin_res
-z <- z[z$picmin_fdr<0.5,]
+z <- z[z$picmin_fdr<0.2,]
 z <- as.data.frame(cbind(z$Orthogroup, z$climate_var))
 colnames(z) <- c("Orthogroup", "removeme")
 
@@ -50,7 +51,7 @@ matrix_df <- as.matrix(matrix_df)
 library(RColorBrewer)
 library(gplots)
 Colors=brewer.pal(11,"RdYlBu")
-Colors=colorRampPalette(Colors)(10)
+Colors=viridis(10, option = "mako", direction = -1)
 Breaks=seq(0,1,0.1)
 
 
@@ -68,5 +69,5 @@ draw(ht, padding = unit(c(20, 20, 20, 20), "mm"))
 
 
 #col_fun <- colorRamp2(c(0, 0.1, 1), c("#9E0142","grey","grey"))
-ht <- Heatmap(matrix_df,row_names_gp = gpar(fontsize = 8, fontface = "bold"), column_names_gp = gpar(fontsize = 10), clustering_method_columns = "complete", col = c("#9E0142", "grey", "grey","grey","grey","grey" ,"grey", "grey","grey","grey"), na_col = "white", cluster_rows = F, top_annotation = column_ha, show_column_dend = FALSE, heatmap_legend_param = list(title = "Empirical p"))
+ht <- Heatmap(matrix_df,row_names_gp = gpar(fontsize = 8, fontface = "bold"), column_names_gp = gpar(fontsize = 10), clustering_method_columns = "complete", col = c("#40498EFF", "grey", "grey","grey","grey","grey" ,"grey", "grey","grey","grey"), na_col = "white", cluster_rows = F, top_annotation = column_ha, show_column_dend = FALSE, heatmap_legend_param = list(title = "Empirical p"))
 draw(ht, padding = unit(c(20, 20, 20, 20), "mm" ))

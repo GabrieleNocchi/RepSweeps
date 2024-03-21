@@ -32,7 +32,7 @@ p1 <- ggplot(my_data, aes(fill=FDR, y=count, x=picmin)) +
         axis.ticks.y=element_blank()) + ylab("OG count\n") +
         scale_colour_viridis_d(direction = -1) + scale_fill_viridis_d(direction = 1, option  = "mako") +
         coord_flip() +
-        scale_y_continuous(breaks=seq(0,500,20), position = "right") +
+        scale_y_continuous(breaks=seq(0,1000,50), position = "right") +
         ggtitle(paste("PicMin OGs = ", format(round(as.numeric(length(data$p)), 1), big.mark=",")))
 
 
@@ -47,7 +47,7 @@ pal <- c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD", "#8C564B", "#E37
 
 pic <- readRDS("gab_picmin_results.rds")
 pic <- pic$picmin_res
-pic <- pic[pic$picmin_fdr < 0.5,]
+pic <- pic[pic$picmin_fdr < 0.1,]
 results <- readRDS("orthogroup_results.rds")
 
 
@@ -76,7 +76,7 @@ data <- pic %>% left_join(results, by = c("Orthogroup"))
 
 
 p2<- ggplot(data, aes(x=reorder(species, ortho_DS, FUN = median), y=ortho_DS)) +
-     geom_boxplot(fill = viridis(1,option = "mako", direction = -1)) + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.5") + xlab("Species")
+     geom_boxplot(fill = viridis(1,option = "mako", direction = -1)) + theme_classic()  + theme(legend.position = "none") + ylab("Ortho_DS\n") + ggtitle("Distribution of the OGs DS corrected emp p-values across species for the PicMin OGs with FDR < 0.1") + xlab("Species")
 
 
 
@@ -105,8 +105,19 @@ final_data <- cbind(reformatted_data,contribution)
 
 p3 <- ggplot(data=final_data, aes(x=reorder(species,contribution), y=contribution*100, fill = "constant") ) +
 geom_bar(stat="identity", width = 0.6, col = "black") + coord_flip() + theme_classic() +  scale_fill_viridis_d(direction = -1, option  = "mako") + xlab("Species") + ylab("Contribution %") + labs(fill='Species') + theme(legend.position = "none") +
-ggtitle("Species contribution to PicMin OGs with FDR < 0.5 --> N(OG-p < 0.1)/N(OG-p)")
+ggtitle("Species contribution to PicMin OGs with FDR < 0.1 --> N(OG-p < 0.1)/N(OG-p)")
 
 
 library(gridExtra)
 grid.arrange(p1, p3,p2,heights = c(1,1, 1))
+
+p3 <- ggplot(data = final_data, aes(x = reorder(species, contribution), y = contribution * 100, fill = "constant")) +
+  geom_bar(stat = "identity", width = 0.6, col = "black") +
+  theme_classic() +
+  scale_fill_viridis_d(direction = -1, option = "mako") +
+  xlab("Species") +
+  ylab("Contribution %") +
+  labs(fill = 'Species') +
+  theme(legend.position = "none") +
+  theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust = 1)) +
+  scale_y_continuous(breaks = seq(0, max(final_data$contribution * 100), by = 20)) + coord_flip()

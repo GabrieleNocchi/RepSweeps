@@ -28,7 +28,7 @@ my_data <- as.data.frame(my_data)
 
 p1 <-   ggplot(my_data, aes(fill=as.factor(ortho_size), y=total_count, x=species)) +
         geom_bar(stat="identity", width = 0.8, position = position_stack(reverse = TRUE)) + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "mako") +
-        labs(fill='Paralogues N') + ylab("Number") + xlab("Species") + ggtitle("Paralogues number per orthogroup") +
+        labs(fill='Paralogues N') + ylab("Number") + xlab("Species") + ggtitle("Paralogues per orthogroup") +
         theme(legend.key.size = unit(0.2, 'cm'), plot.title = element_text(size = 10, face = "bold"))
 
 
@@ -44,7 +44,7 @@ total <- table(my_data_2$total_count)
 total <- as.data.frame(total)
 
 p2 <- ggplot(data=total, aes(x=Var1, y=Freq, fill = "constant")) +
-      geom_bar(stat="identity", color= "black", width = 0.8,linewidth = 0.3) + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "mako") + xlab("Number of Species") + ylab("Number") + ggtitle("OGs tested in PicMin by species number")+
+      geom_bar(stat="identity", color= "black", width = 0.8,linewidth = 0.3) + theme_classic() + scale_fill_viridis_d(direction = -1, option  = "mako") + xlab("Number of Species") + ylab("Number") + ggtitle("OGs tested in PicMin")+
       theme(plot.title = element_text(size = 10, face = "bold"), legend.position = "none")
 
 ortho_species <- results %>% left_join(my_data_2, by = c("Orthogroup"))
@@ -56,13 +56,13 @@ my_data_3 <- as.data.frame(my_data_3)
 
 p3 <- ggplot(my_data_3, aes(fill=as.factor(total_count), y=number, x=species)) +
       geom_bar(stat="identity", width = 0.8) + coord_flip() + theme_classic() + scale_fill_viridis_d(direction = 1, option  = "mako") +
-      labs(fill='Species N') + ylab("Number") + xlab("Species") + ggtitle("Species number per orthogroup in each species") +
+      labs(fill='Species N') + ylab("Number") + xlab("Species") + ggtitle("Species per orthogroup") +
       theme(legend.key.size = unit(0.2, 'cm'),plot.title = element_text(size = 10, face = "bold"))
 
 
 
 
-svg("OGs_assement.svg")
+svg("OGs_assement.svg", height = 7, width = 7)
 library(gridExtra)
-grid.arrange(p1,p3,p2,ncol=1,heights = c(2, 2, 2))
+grid.arrange(p1,p3,p2,ncol=2)
 dev.off()

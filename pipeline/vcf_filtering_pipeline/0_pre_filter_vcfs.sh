@@ -6,7 +6,7 @@ do
 
 
 	#filter
-	/data/programs/vcftools_0.1.13/bin/vcftools --gzvcf $FILE --max-missing 0.7 --maf $af --minQ 30 --minGQ 20 --minDP 5 --max-alleles 2 --recode --recode-INFO-all
+	/data/programs/vcftools_0.1.13/bin/vcftools --gzvcf $FILE --max-missing 0.7 --maf $af --minQ 30 --minGQ 20 --minDP 5 --max-alleles 2 --mac 2 --recode --recode-INFO-all
 
 
 	rm out.log
